@@ -1,21 +1,18 @@
 package com.site.woolencreations.user;
 
-import lombok.experimental.SuperBuilder;
-
 import javax.persistence.*;
 
 @Entity
 @Table
-@SuperBuilder
 public class User {
     @Id
     @SequenceGenerator(
-            name="user_sequence",
-            sequenceName="user_sequence"
+            name = "user_sequence",
+            sequenceName = "user_sequence"
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator ="user_sequence"
+            generator = "user_sequence"
     )
     private String username;
     private String password;
@@ -25,10 +22,11 @@ public class User {
     private int addressID;
     private String role;
     private int points;
-    private boolean guest ;
+    private boolean guest;
 
     public User() {
     }
+
     @Override
     public String toString() {
         return "User{" +

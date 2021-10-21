@@ -1,27 +1,19 @@
 package com.site.woolencreations.product;
 
-import lombok.*;
-import lombok.experimental.SuperBuilder;
-
 import javax.persistence.*;
 
 @Entity
 @Table
-@SuperBuilder
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Setter
-//@Getter
 public class Product {
 
     @Id
     @SequenceGenerator(
-            name="product_sequence",
-            sequenceName="product_sequence"
+            name = "product_sequence",
+            sequenceName = "product_sequence"
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator ="product_sequence"
+            generator = "product_sequence"
     )
     private long id;
     private String name;
@@ -32,17 +24,17 @@ public class Product {
     private Double discount;
 
 
-@Override
-public String toString() {
-    return "Product{" +
-            "id : " + id +
-            ", name: '" + name + '\'' +
-            ", description: '" + description + '\'' +
-            ", price:" + price +
-            ", points:" + points +
-            ", discount:" + discount +
-            '}';
-}
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id : " + id +
+                ", name: '" + name + '\'' +
+                ", description: '" + description + '\'' +
+                ", price:" + price +
+                ", points:" + points +
+                ", discount:" + discount +
+                '}';
+    }
 
     public Product() {
     }

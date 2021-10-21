@@ -7,14 +7,7 @@ import javax.persistence.*;
 public class Product {
 
     @Id
-    @SequenceGenerator(
-            name = "product_sequence",
-            sequenceName = "product_sequence"
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "product_sequence"
-    )
+    @GeneratedValue( strategy= GenerationType.AUTO )
     private long id;
     private String name;
     private String description;

@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/findByUserID")
-    public Optional<User> getUserByUserID(@RequestParam int id) {
+    public Optional<User> getUserByUserID(@RequestParam Long id) {
         return userService.findUserByUserID(id);
     }
 
@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete")
-    public String deleteUser (@RequestParam int userID){
+    public String deleteUser (@RequestParam Long userID){
         userService.deleteUser(userID);
         return "Success";
 

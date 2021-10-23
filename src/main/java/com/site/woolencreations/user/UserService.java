@@ -33,7 +33,7 @@ public class UserService {
      * Find All Users by id
      * @return
      */
-    public Optional<User> findUserByUserID(int id){
+    public Optional<User> findUserByUserID(Long id){
         return userRepository.findUserByID(id);
     }
 
@@ -59,13 +59,12 @@ public class UserService {
      *edit a User in the DB only if the User exist.
      * @param user
      */
-    public void editUser(User user){
-        Optional<User> UserByUsername = userRepository.findUserByUsername(user.getUsername());
-        if(UserByUsername.isPresent()) {
-            System.out.println("\n" + "user.getUsername(): " + user.getUsername() + "\n");
-            userRepository.editUser(user);
-        }else{
-            System.out.println("The User does not exists!!");
+    public void editUser(User user) {
+        Optional<User> DB_user = userRepository.findUserByID(user.getId());
+        if (DB_user.isPresent()) {
+            userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException("The user with e-mail: "+user.getUsername() +" does not exist!");
         }
     }
 
@@ -73,10 +72,10 @@ public class UserService {
      *delete a User in the DB only if the User exist.
      * @param userID
      */
-    public void deleteUser(int userID){
+    public void deleteUser(Long userID){
         Optional<User> UserByID = userRepository.findUserByID(userID);
         if(UserByID.isPresent()){
-            userRepository.deleteByUserID(userID);
+            userRepository.deleteAllById(userID);
         }
 
     }

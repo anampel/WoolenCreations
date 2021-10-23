@@ -29,7 +29,7 @@ public class Address {
     private String city;
     private String country;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
 

@@ -32,6 +32,4 @@ public class Address {
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
-
-    //TODO override toString (json)
 }

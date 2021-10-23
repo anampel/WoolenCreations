@@ -33,24 +33,4 @@ public class User {
     private String role;
     private int points;
     private boolean guest;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "username : " + username +
-                ", password: '" + password + '\'' +
-                ", first_name: '" + first_name + '\'' +
-                ", last_name:" + last_name +
-                ", phone:" + phone +
-                ", addressID: [" +
-                addresses
-                        .stream()
-                        .map(address -> address.toString())
-
-                + "]" +
-                ", role:" + role +
-                ", points:" + points +
-                ", guest:" + guest +
-                '}';
-    }
 }

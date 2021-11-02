@@ -30,6 +30,7 @@ public class Address {
     private String country;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
     private User user;
 
 

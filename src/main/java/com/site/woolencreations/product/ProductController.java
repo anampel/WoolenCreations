@@ -24,9 +24,20 @@ public class ProductController {
     public List<Product> getProduct() {
         return productService.getProduct();
     }
+
     @GetMapping("/findByName")
     public Optional<Product> getProductByName( @RequestParam String name) {
         return productService.findProductByName(name);
+    }
+
+    @GetMapping("/findByDescription")
+    public Optional<Product> getProductByDescription( @RequestParam String descr) {
+        return productService.findProductsByDescriptionContains(descr);
+    }
+
+    @GetMapping("/findByKeyword")
+    public Optional<Product> getProductByKeyword( @RequestParam String keyword) {
+        return productService.findProductsByKeyword(keyword);
     }
 
     @PostMapping("/add")

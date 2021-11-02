@@ -12,8 +12,8 @@ public class ProductService {
     private final ProductRepository producRepository;
 
     @Autowired
-    public ProductService(ProductRepository producRepository) {
-        this.producRepository = producRepository;
+    public ProductService(ProductRepository productRepository) {
+        this.producRepository = productRepository;
     }
 
     /**
@@ -24,22 +24,41 @@ public class ProductService {
         return producRepository.findAll();
     }
     /**
-     * Find All products
+     * Find products by name
      * @return
      */
     public Optional<Product> findProductByName(String name){
         return producRepository.findProductByName(name);
     }
 
+    /**
+     * Find Products which include the given description
+     * @param description
+     * @return
+     */
+    public Optional<Product> findProductsByDescriptionContains(String description){
+        return producRepository.findProductsByDescriptionContains(description);
+    }
 
     /**
-     *add in the DB a product only if the product name does not exists already in the db.
+     * Find products with keyword which could be present
+     * as it is OR as part in the name or in the description of the product
+     * @param keyword
+     * @return
+     */
+    public Optional<Product> findProductsByKeyword(String keyword){
+        return producRepository.findProductsByKeyword(keyword);
+    }
+
+    /**
+     * Add in the DB a product only if the product name does not exists already in the db.
      * @param product
      */
     public void addNewProduct(Product product) {
         Optional<Product> productByName = producRepository
                 .findProductByName(product.getName());
 
+        //TODO check if it is business correct. If yes... the searches need some fixes  ( findByName - not list)
         if(productByName.isPresent()){
             throw new IllegalStateException("The product already exists!!");
         }

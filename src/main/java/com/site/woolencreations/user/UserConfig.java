@@ -21,9 +21,18 @@ public class UserConfig {
                     .city("Agia Paraskevi")
                     .country("Greece")
                     .build();
+            Address address1 = Address
+                    .builder()
+                    .address("xiou")
+                    .number(59)
+                    .postCode("15343")
+                    .city("Agia Paraskevi")
+                    .country("Greece")
+                    .build();
 
             List<Address> addresslist = new ArrayList();
             addresslist.add(address);
+            addresslist.add(address1);
 
             User user = User
                     .builder()

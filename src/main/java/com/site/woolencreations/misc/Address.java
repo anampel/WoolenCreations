@@ -29,8 +29,8 @@ public class Address {
     private String city;
     private String country;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
 
 

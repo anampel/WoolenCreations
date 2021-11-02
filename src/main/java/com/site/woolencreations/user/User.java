@@ -1,7 +1,6 @@
 package com.site.woolencreations.user;
 
 import com.site.woolencreations.misc.Address;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name="USER")
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +27,8 @@ public class User {
     private String first_name;
     private String last_name;
     private String phone;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
     private List<Address> addresses;
     private String role;
     private int points;

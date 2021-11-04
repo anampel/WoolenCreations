@@ -1,9 +1,22 @@
 package com.site.woolencreations.product;
 
-import javax.persistence.*;
+import com.site.woolencreations.misc.Category;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Table(name = "PRODUCT")
 @Entity
-@Table
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Product {
 
     @Id
@@ -12,71 +25,13 @@ public class Product {
     private String name;
     private String description;
     private Double price;
-    private long category_id;
+    @ManyToMany(cascade = CascadeType.ALL )
+    @JoinTable(
+            name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoryId"))
+    private List<Category> categoryList;
     private int points;
     private Double discount;
 
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id : " + id +
-                ", name: '" + name + '\'' +
-                ", description: '" + description + '\'' +
-                ", price:" + price +
-                ", points:" + points +
-                ", discount:" + discount +
-                '}';
-    }
-
-    public Product() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public long getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(long category_id) {
-        this.category_id = category_id;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    public Double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
 }

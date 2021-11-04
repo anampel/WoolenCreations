@@ -65,6 +65,9 @@ public class ProductService {
         producRepository.save(product);
 
     }
+    public Optional<Product> findProductsByCategory(String keyword){
+        return producRepository.findProductsByCategory(keyword);
+    }
 
 
 }

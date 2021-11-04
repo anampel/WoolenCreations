@@ -39,6 +39,10 @@ public class ProductController {
     public Optional<Product> getProductByKeyword( @RequestParam String keyword) {
         return productService.findProductsByKeyword(keyword);
     }
+    @GetMapping("/findByCategory")
+    public Optional<Product> getProductByCategory( @RequestParam String categoryName) {
+        return productService.findProductsByCategory(categoryName);
+    }
 
     @PostMapping("/add")
     public String registerNewProduct (@RequestBody Product product){

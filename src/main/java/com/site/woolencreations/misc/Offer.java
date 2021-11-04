@@ -35,5 +35,5 @@ public class Offer {
     private String description;
     private Date start_date;
     private Date end_date;
-    private double discount;
+    private Double discount;
 }

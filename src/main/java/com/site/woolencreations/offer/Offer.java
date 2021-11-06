@@ -1,4 +1,4 @@
-package com.site.woolencreations.misc;
+package com.site.woolencreations.offer;
 
 import com.site.woolencreations.product.Product;
 import lombok.AllArgsConstructor;

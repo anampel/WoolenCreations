@@ -59,6 +59,7 @@ public class ProductService {
                 .findProductByName(product.getName());
 
         //TODO check if it is business correct. If yes... the searches need some fixes  ( findByName - not list)
+        //TODO when we add a product, a new category is creating every time, this need to be fixed
         if(productByName.isPresent()){
             throw new IllegalStateException("The product already exists!!");
         }

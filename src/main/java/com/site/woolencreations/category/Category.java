@@ -1,4 +1,4 @@
-package com.site.woolencreations.misc;
+package com.site.woolencreations.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.site.woolencreations.address;
+package com.site.woolencreations.misc;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.site.woolencreations.product;
 
-import com.site.woolencreations.misc.Category;
+import com.site.woolencreations.category.Category;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

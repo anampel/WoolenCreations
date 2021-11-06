@@ -1,6 +1,6 @@
 package com.site.woolencreations.user;
 
-import com.site.woolencreations.address.Address;
+import com.site.woolencreations.misc.Address;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

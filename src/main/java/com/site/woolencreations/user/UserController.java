@@ -43,6 +43,7 @@ public class UserController {
 
     }
 
+    //TODO check if it works properly
     @PutMapping("/edit")
     public String editUser (@RequestBody User user){
         userService.editUser(user);

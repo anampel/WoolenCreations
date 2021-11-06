@@ -1,6 +1,6 @@
 package com.site.woolencreations.user;
 
-import com.site.woolencreations.misc.Address;
+import com.site.woolencreations.address.Address;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,7 +50,7 @@ public class UserConfig {
                     .first_name("Ana")
                     .last_name("Mpel")
                     .password("XXX")
-                    .addresses(addresslist)
+                    .addressList(addresslist)
                     .points(150)
                     .guest(false)
                     .role("customer")
@@ -62,7 +62,7 @@ public class UserConfig {
                     .first_name("spi")
                     .last_name("kat")
                     .password("aaa")
-                    .addresses(addresslist1)
+                    .addressList(addresslist1)
                     .points(150)
                     .guest(false)
                     .role("customer")

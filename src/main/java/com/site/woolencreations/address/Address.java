@@ -1,17 +1,20 @@
-package com.site.woolencreations.misc;
+package com.site.woolencreations.address;
 
-import com.site.woolencreations.user.User;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
-@Table
+@Table(name = "ADDRESS")
 @Entity
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Address {
     @Id
     @SequenceGenerator(
@@ -22,16 +25,12 @@ public class Address {
             strategy = GenerationType.SEQUENCE,
             generator = "address_sequence"
     )
-    private int addressId;
+    private Long addressId;
     private String address;
     private int number;
     private String postCode;
     private String city;
     private String country;
-
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
 
 
     //TODO override toString (json)

@@ -1,5 +1,6 @@
 package com.site.woolencreations.user;
 
+import com.site.woolencreations.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,26 @@ public class UserService {
         return userRepository.findUserByID(id);
     }
 
+    /**
+     * Find points of a user by username
+     * @return
+     */
+    public Optional<User> findPointsByUsername(String username){
+        return userRepository.findPointsByUsername(username);
+    }
+
+    /**
+     * Find if the user is guest
+     * @return
+     */
+
+    public Boolean findIfGuest(String username){
+        return userRepository.findIfGuest(username);
+    }
+
+    public List<Product> findUserWishList(Long id){
+        return userRepository.findUserWishList(id);
+    }
 
     /**
      *add in the DB a User only if the User name does not exists already in the db.

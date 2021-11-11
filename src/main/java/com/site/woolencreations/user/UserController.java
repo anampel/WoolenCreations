@@ -1,5 +1,7 @@
 package com.site.woolencreations.user;
 
+import com.site.woolencreations.misc.Address;
+import com.site.woolencreations.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,11 +38,25 @@ public class UserController {
         return userService.findUserByUserID(id);
     }
 
+    @GetMapping("/findPointsByUsername")
+    public Optional<User> findPointsByUsername(@RequestParam String username) {
+        return userService.findPointsByUsername(username);
+    }
+
+    @GetMapping("/findIfGuest")
+    public Boolean findIfGuest(@RequestParam String username){
+        return userService.findIfGuest(username);
+    }
+
     @PostMapping("/add")
     public String registerNewUser (@RequestBody User user){
         userService.addNewUser(user);
         return "Success";
+    }
 
+    @GetMapping("/findWishList")
+    public List<Product> findUserWishList(@RequestParam Long userId){
+        return userService.findUserWishList(userId);
     }
 
     //TODO check if it works properly

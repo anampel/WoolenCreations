@@ -11,7 +11,7 @@ import java.util.List;
 @Configuration
 public class UserConfig {
     @Bean
-    CommandLineRunner commandLineRunner1(UserRepository repository) {
+    CommandLineRunner commandLineRunnerUser(UserRepository repository) {
         return args -> {
             Address address = Address
                     .builder()

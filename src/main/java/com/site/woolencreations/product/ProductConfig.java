@@ -10,7 +10,7 @@ import java.util.List;
 @Configuration
 public class ProductConfig {
     @Bean
-    CommandLineRunner commandLineRunner(ProductRepository repository) {
+    CommandLineRunner commandLineRunnerProduct(ProductRepository repository) {
         return args -> {
             Product p = Product.builder()
                     .description("aaaa")
@@ -28,6 +28,7 @@ public class ProductConfig {
                                     .build()
 
                     ))
+//                    .offerId(1L)
                     .points(0)
                     .build();
 

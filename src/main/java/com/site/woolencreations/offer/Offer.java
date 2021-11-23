@@ -28,10 +28,9 @@ public class Offer {
             strategy = GenerationType.SEQUENCE,
             generator = "offer_sequence"
     )
-    private int offerId;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="offer_id")
-    private List<Product> productList;
+    private Long id;
+//    @OneToMany(mappedBy="offer", cascade = CascadeType.ALL)
+//    private List<Product> productList;
     private String description;
     private Date start_date;
     private Date end_date;

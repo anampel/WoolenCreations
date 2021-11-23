@@ -34,9 +34,9 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "categoryId"))
     private List<Category> categoryList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="offer_id")
-    private Offer offer;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name="offer_id")
+//    private Offer offer;
 
     private int points;
     private Double discount;

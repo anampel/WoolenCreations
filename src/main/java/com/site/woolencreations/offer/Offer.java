@@ -30,7 +30,7 @@ public class Offer {
     )
     private int offerId;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="product_id")
+    @JoinColumn(name="offer_id")
     private List<Product> productList;
     private String description;
     private Date start_date;

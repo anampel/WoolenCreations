@@ -20,7 +20,14 @@ import java.util.List;
 @Setter
 public class User {
     @Id
-    @GeneratedValue( strategy= GenerationType.AUTO )
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
     private Long id;
     @Column(unique = true, nullable = false, length = 64)
     private String username;
@@ -44,6 +51,4 @@ public class User {
     private String role;
     private int points;
     private Boolean guest;
-
-
 }

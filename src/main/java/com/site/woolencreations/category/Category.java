@@ -17,14 +17,7 @@ import javax.persistence.*;
 @Setter
 public class Category {
     @Id
-    @SequenceGenerator(
-            name = "category_sequence",
-            sequenceName = "category_sequence"
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "category_sequence"
-    )
+    @GeneratedValue( strategy= GenerationType.AUTO )
     private int categoryId;
     private String categoryName;
     private String categoryDescription;

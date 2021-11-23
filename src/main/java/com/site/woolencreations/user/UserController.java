@@ -59,12 +59,10 @@ public class UserController {
         return userService.findUserWishList(userId);
     }
 
-    //TODO check if it works properly
     @PutMapping("/edit")
     public String editUser (@RequestBody User user){
         userService.editUser(user);
         return "Success";
-
     }
 
     @DeleteMapping("/delete")
@@ -73,4 +71,6 @@ public class UserController {
         return "Success";
 
     }
+
+
 }

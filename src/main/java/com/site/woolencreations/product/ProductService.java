@@ -1,5 +1,6 @@
 package com.site.woolencreations.product;
 
+import com.site.woolencreations.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +10,11 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-    private final ProductRepository producRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
     public ProductService(ProductRepository productRepository) {
-        this.producRepository = productRepository;
+        this.productRepository = productRepository;
     }
 
     /**
@@ -21,23 +22,37 @@ public class ProductService {
      * @return
      */
     public List<Product> getProduct(){
-        return producRepository.findAll();
+        return productRepository.findAll();
     }
     /**
      * Find products by name
      * @return
      */
     public Optional<Product> findProductByName(String name){
-        return producRepository.findProductByName(name);
+        return productRepository.findProductByName(name);
     }
 
+    /**
+     * Find products by id
+     * @return
+     */
+    public Optional<Product> findProductById(Long id){
+        return productRepository.findProductById(id);
+    }
+    /**
+     *Find products by category
+     * @param keyword
+     */
+    public List<Product> findProductsByCategory(String keyword){
+        return productRepository.findProductsByCategory(keyword);
+    }
     /**
      * Find Products which include the given description
      * @param description
      * @return
      */
     public Optional<Product> findProductsByDescriptionContains(String description){
-        return producRepository.findProductsByDescriptionContains(description);
+        return productRepository.findProductsByDescriptionContains(description);
     }
 
     /**
@@ -46,8 +61,8 @@ public class ProductService {
      * @param keyword
      * @return
      */
-    public Optional<Product> findProductsByKeyword(String keyword){
-        return producRepository.findProductsByKeyword(keyword);
+    public List<Product> findProductsByKeyword(String keyword){
+        return productRepository.findProductsByKeyword(keyword);
     }
 
     /**
@@ -55,7 +70,7 @@ public class ProductService {
      * @param product
      */
     public void addNewProduct(Product product) {
-        Optional<Product> productByName = producRepository
+        Optional<Product> productByName = productRepository
                 .findProductByName(product.getName());
 
         //TODO check if it is business correct. If yes... the searches need some fixes  ( findByName - not list)
@@ -63,12 +78,32 @@ public class ProductService {
         if(productByName.isPresent()){
             throw new IllegalStateException("The product already exists!!");
         }
-        producRepository.save(product);
+        productRepository.save(product);
 
     }
-    public Optional<Product> findProductsByCategory(String keyword){
-        return producRepository.findProductsByCategory(keyword);
+
+    /**
+     *edit a product in the DB only if the product exist.
+     * @param product
+     */
+    public void editProduct(Product product) {
+        Optional<Product> DB_prod = productRepository.findProductById(product.getId());
+        if (DB_prod.isPresent()) {
+            productRepository.save(product);
+        } else {
+            throw new IllegalArgumentException("The product id: "+product.getId() +" does not exist!");
+        }
     }
 
+    /**
+     *delete a Product in the DB only if the Product exist.
+     * @param id
+     */
+    public void deleteProduct(Long id){
+        Optional<Product> prodById = productRepository.findProductById(id);
+        if(prodById.isPresent()){
+            productRepository.deleteAllById(id);
+        }
 
+    }
 }

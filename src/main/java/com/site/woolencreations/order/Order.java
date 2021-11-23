@@ -1,4 +1,4 @@
-package com.site.woolencreations.misc;
+package com.site.woolencreations.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,22 +7,22 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.Date;
 
-@Table(name = "ADDRESS")
+@Table(name = "ORDERS")
 @Entity
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Address {
+public class Order {
     @Id
     @GeneratedValue( strategy= GenerationType.AUTO )
-    private Long addressId;
-    private String address;
-    private int number;
-    private String postCode;
-    private String city;
-    private String country;
-
+    private Long orderID;
+    private Date date;
+    private String phone;
+    private Boolean paid;
+    private String state;
+    //shippingID
 }

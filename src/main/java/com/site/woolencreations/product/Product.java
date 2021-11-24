@@ -1,6 +1,6 @@
 package com.site.woolencreations.product;
 
-import com.site.woolencreations.category.Category;
+import com.site.woolencreations.misc.Category;
 import com.site.woolencreations.offer.Offer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

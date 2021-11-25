@@ -29,8 +29,6 @@ public class Offer {
             generator = "offer_sequence"
     )
     private Long id;
-//    @OneToMany(mappedBy="offer", cascade = CascadeType.ALL)
-//    private List<Product> productList;
     private String description;
     private Date start_date;
     private Date end_date;

@@ -29,7 +29,14 @@ public class ValuationService {
         return valuationRepository.findByIdUserId(userId);
     }
 
+    /**
+     *delete a valuation in the DB
+     * @param userID
+     */
+    public void deleteValuation(Long userID, Long productId) {
+        valuationRepository.deleteAllByIds(userID, productId);
 
+    }
     /**
      * add a valuation only if the user_id and the product_id pair does not exist
      *

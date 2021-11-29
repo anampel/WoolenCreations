@@ -32,4 +32,11 @@ public class ValuationController {
         valuationService.addValuation(val, userId, productId);
         return "Success";
     }
+
+    @DeleteMapping("/delete")
+    public String deleteValuation (@RequestParam Long userID, Long prodID){
+        valuationService.deleteValuation(userID, prodID);
+        return "Success";
+
+    }
 }

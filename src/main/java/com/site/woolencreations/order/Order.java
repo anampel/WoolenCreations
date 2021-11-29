@@ -27,9 +27,12 @@ public class Order {
             generator = "order_sequence"
     )
     private Long orderID;
+    //TODO userId
+    //TODO addressId
     private Date date;
     private String phone;
     private Boolean paid;
     private String state;
-    //shippingID
+    private String shipping_company_name;
+    private Double shipping_cost;
 }

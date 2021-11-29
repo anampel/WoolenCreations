@@ -25,6 +25,10 @@ public class ValuationService {
         return valuationRepository.findByIdProductId(prodID);
     }
 
+    public Optional<Valuation> findAllPerUser(Long userId) {
+        return valuationRepository.findByIdUserId(userId);
+    }
+
 
     /**
      * add a valuation only if the user_id and the product_id pair does not exist

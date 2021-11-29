@@ -22,6 +22,11 @@ public class ValuationController {
         return valuationService.findAllPerProduct(prodID);
     }
 
+    @GetMapping("/findAllPerUser")
+    public Optional<Valuation> findAllPerUser(@RequestParam Long userId){
+        return valuationService.findAllPerUser(userId);
+    }
+
     @PostMapping("/add")
     public String registerNewUser (@RequestBody Valuation val, @RequestParam Long userId, @RequestParam Long productId){
         valuationService.addValuation(val, userId, productId);

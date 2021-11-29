@@ -1,6 +1,5 @@
 package com.site.woolencreations.offer;
 
-import com.site.woolencreations.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Table(name = "OFFER")
 @Entity

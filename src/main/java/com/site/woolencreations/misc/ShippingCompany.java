@@ -17,8 +17,15 @@ import javax.persistence.*;
 @Setter
 public class ShippingCompany {
     @Id
-    @GeneratedValue( strategy= GenerationType.AUTO )
-    private int shippingID;
+    @SequenceGenerator(
+            name = "shipping_sequence",
+            sequenceName = "shipping_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "shipping_sequence"
+    )
+    private Long shippingID;
     private String company_name;
     private String company_phone;
     private Double shipping_cost;

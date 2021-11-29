@@ -18,7 +18,14 @@ import java.util.Date;
 @Setter
 public class Order {
     @Id
-    @GeneratedValue( strategy= GenerationType.AUTO )
+    @SequenceGenerator(
+            name = "order_sequence",
+            sequenceName = "order_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "order_sequence"
+    )
     private Long orderID;
     private Date date;
     private String phone;

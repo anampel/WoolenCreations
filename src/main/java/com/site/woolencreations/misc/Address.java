@@ -17,7 +17,14 @@ import javax.persistence.*;
 @Setter
 public class Address {
     @Id
-    @GeneratedValue( strategy= GenerationType.AUTO )
+    @SequenceGenerator(
+            name = "address_sequence",
+            sequenceName = "address_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "address_sequence"
+    )
     private Long addressId;
     private String address;
     private int number;

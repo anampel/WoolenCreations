@@ -21,7 +21,14 @@ import java.util.List;
 public class Product {
 
     @Id
-    @GeneratedValue( strategy= GenerationType.AUTO )
+    @SequenceGenerator(
+            name = "product_sequence",
+            sequenceName = "product_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "product_sequence"
+    )
     private Long id;
     private String name;
     private String description;

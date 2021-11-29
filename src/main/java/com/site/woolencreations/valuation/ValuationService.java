@@ -21,6 +21,10 @@ public class ValuationService {
         this.productRepository = productRepository;
     }
 
+    public Optional<Valuation> findAllPerProduct(Long prodID) {
+        return valuationRepository.findByIdProductId(prodID);
+    }
+
 
     /**
      * add a valuation only if the user_id and the product_id pair does not exist
@@ -32,10 +36,6 @@ public class ValuationService {
             ValuationId valuationId = new ValuationId();
             Optional<User> user = userRepository.findUserByID(userId);
             Optional<Product> product = productRepository.findProductById(productId);
-            Optional<Valuation> valid = valuationRepository.findValuationById_UserIdAndId_ProductId(userId, productId);
-            if (!valid.isPresent()) {
-                throw new IllegalStateException("The valuation already exists!!");
-            }
             valuationId.setProductId(product.get());
             valuationId.setUserId(user.get());
             valuation.setId(valuationId);

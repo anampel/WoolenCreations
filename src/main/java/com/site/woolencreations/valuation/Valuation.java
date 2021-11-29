@@ -25,9 +25,4 @@ public class Valuation implements Serializable {
     private int stars;
     private Date date;
 
-//    public void setDate(Date date) throws ParseException {
-//        date = new Date();
-//        this.date = new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(date));
-//    }
 }
-//INSERT INTO VALUATION VALUES ('Bad choice', 1, 2, 1);

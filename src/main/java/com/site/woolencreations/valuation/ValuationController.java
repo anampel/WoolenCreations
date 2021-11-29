@@ -4,6 +4,9 @@ import com.site.woolencreations.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping(path = "/api/v1/valuation")
 public class ValuationController {
@@ -12,6 +15,11 @@ public class ValuationController {
     @Autowired
     public ValuationController(ValuationService valuationService) {
         this.valuationService = valuationService;
+    }
+
+    @GetMapping("/findAllPerProduct")
+    public Optional<Valuation> findAllPerProduct(@RequestParam Long prodID){
+        return valuationService.findAllPerProduct(prodID);
     }
 
     @PostMapping("/add")

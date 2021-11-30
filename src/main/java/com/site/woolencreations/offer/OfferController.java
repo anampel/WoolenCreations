@@ -36,4 +36,10 @@ public class OfferController {
         offerService.editOffer(offer);
         return "Success";
     }
+
+    @DeleteMapping("delete")
+    public String deleteOffer(@RequestParam Long id){
+        offerService.deleteOffer(id);
+        return "Success";
+    }
 }

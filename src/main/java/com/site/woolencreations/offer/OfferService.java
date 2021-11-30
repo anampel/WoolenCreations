@@ -53,6 +53,18 @@ public class OfferService {
         }
     }
 
+    /**
+     *delete a User in the DB only if the User exist.
+     * @param offerID
+     */
+    public void deleteOffer(Long offerID){
+        Optional<Offer> offerById = offerRepository.findById(offerID);
+        if(offerById.isPresent()){
+            offerRepository.deleteAllById(offerID);
+        }
+
+    }
+
     //TODO findOfferByDiscount
     //TODO getActiveOffers
 

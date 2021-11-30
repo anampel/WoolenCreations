@@ -46,6 +46,14 @@ public class ProductService {
     public List<Product> findProductsByCategory(String keyword){
         return productRepository.findProductsByCategory(keyword);
     }
+
+    /**
+     *Find products by discount
+     * @param discount
+     */
+    public List<Product> findProductByDiscount(Double discount){
+        return productRepository.findProductByDiscount(discount);
+    }
     /**
      * Find Products which include the given description
      * @param description

@@ -51,6 +51,11 @@ public class ProductController {
         return productService.findProductsByCategory(categoryName);
     }
 
+    @GetMapping("/findByDiscount")
+    public List<Product> findProductByDiscount( @RequestParam Double discount) {
+        return productService.findProductByDiscount(discount);
+    }
+
     @PostMapping("/add")
     public String registerNewProduct (@RequestBody Product product){
         productService.addNewProduct(product);

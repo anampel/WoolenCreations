@@ -14,7 +14,6 @@ public class ProductConfig {
         return args -> {
             Product p = Product.builder()
                     .description("aaaa")
-                    .discount(10.0)
                     .name("kaskol")
                     .price(15.0)
                     .categoryList(List.of(

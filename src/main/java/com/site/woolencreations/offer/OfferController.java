@@ -48,4 +48,9 @@ public class OfferController {
     public Optional<Offer> findByDiscount(@RequestParam Double discount){
         return offerService.getAllByDiscount(discount);
     }
+
+    @GetMapping("/getActiveOffers")
+    public Optional<Offer> getActiveOffers(){
+        return offerService.getActiveOffers();
+    }
 }

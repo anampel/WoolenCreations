@@ -3,6 +3,7 @@ package com.site.woolencreations.offer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,12 +64,20 @@ public class OfferService {
         }
 
     }
-
+    /**
+     *find all offer that have the given discount.
+     * @param discount
+     */
     public Optional<Offer> getAllByDiscount(Double discount){
        return offerRepository.findByDiscount(discount);
     }
 
-    //TODO findOfferByDiscount
+    public Optional<Offer> getActiveOffers(){
+        long millis = System.currentTimeMillis();
+        java.sql.Date today = new java.sql.Date(millis);
+        return offerRepository.getActiveOffers(today);
+    }
+
     //TODO getActiveOffers
 
 }

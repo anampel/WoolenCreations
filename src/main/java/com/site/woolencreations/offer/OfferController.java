@@ -30,4 +30,10 @@ public class OfferController {
         offerService.addNewOffer(offer);
         return "Success";
     }
+
+    @PostMapping("/edit")
+    public String editOffer(@RequestBody Offer offer){
+        offerService.editOffer(offer);
+        return "Success";
+    }
 }

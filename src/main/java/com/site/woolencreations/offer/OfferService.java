@@ -1,5 +1,6 @@
 package com.site.woolencreations.offer;
 
+import com.site.woolencreations.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,10 @@ public class OfferService {
         return offerRepository.findAll();
     }
 
+    /**
+     *add in the DB a offer only if the offer id does not exist already in the db.
+     * @param offer
+     */
     public void addNewOffer(Offer offer){
         try {
             Optional<Offer> offerById = offerRepository.findById(offer.getId());
@@ -35,9 +40,20 @@ public class OfferService {
         }
     }
 
+    /**
+     *edit a User in the DB only if the User exist.
+     * @param offer
+     */
+    public void editOffer(Offer offer) {
+        Optional<Offer> offerById = offerRepository.findById(offer.getId());
+        if (offerById.isPresent()) {
+            offerRepository.save(offer);
+        } else {
+            throw new IllegalArgumentException("The user with e-mail: "+offer.getId() +" does not exist!");
+        }
+    }
+
     //TODO findOfferByDiscount
     //TODO getActiveOffers
-
-    //TODO edit
 
 }

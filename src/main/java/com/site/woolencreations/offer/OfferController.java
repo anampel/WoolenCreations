@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/v1/offer")
@@ -37,9 +38,14 @@ public class OfferController {
         return "Success";
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("/delete")
     public String deleteOffer(@RequestParam Long id){
         offerService.deleteOffer(id);
         return "Success";
+    }
+
+    @GetMapping("/findByDiscount")
+    public Optional<Offer> findByDiscount(@RequestParam Double discount){
+        return offerService.getAllByDiscount(discount);
     }
 }

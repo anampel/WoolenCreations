@@ -52,6 +52,7 @@ public class UserService {
      */
 
     public Boolean findIfGuest(String username){
+
         return userRepository.findIfGuest(username);
     }
 

@@ -1,6 +1,5 @@
 package com.site.woolencreations.offer;
 
-import com.site.woolencreations.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +62,10 @@ public class OfferService {
             offerRepository.deleteAllById(offerID);
         }
 
+    }
+
+    public Optional<Offer> getAllByDiscount(Double discount){
+       return offerRepository.findByDiscount(discount);
     }
 
     //TODO findOfferByDiscount

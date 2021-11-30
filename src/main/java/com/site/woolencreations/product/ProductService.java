@@ -48,11 +48,13 @@ public class ProductService {
     }
 
     /**
-     *Find products by discount
+     *Find products by a given discount where the offer is active
      * @param discount
      */
     public List<Product> findProductByDiscount(Double discount){
-        return productRepository.findProductByDiscount(discount);
+        long millis = System.currentTimeMillis();
+        java.sql.Date today = new java.sql.Date(millis);
+        return productRepository.findProductByDiscount(discount, today);
     }
     /**
      * Find Products which include the given description

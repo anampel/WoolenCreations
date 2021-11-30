@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public interface ProductRepository  extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p, Category c WHERE c.categoryName = ?1")
     List<Product> findProductsByCategory(String categoryName);
 
-    @Query("SELECT p FROM Product p, Offer f WHERE f.discount =?1")
-    List<Product> findProductByDiscount(Double discount);
+    @Query("SELECT p FROM Product p, Offer f WHERE f.discount =?1 and f.start_date <= ?2 and f.end_date >= ?2")
+    List<Product> findProductByDiscount(Double discount, Date today);
 
 }

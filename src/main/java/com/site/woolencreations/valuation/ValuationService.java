@@ -58,4 +58,14 @@ public class ValuationService {
             throw new IllegalArgumentException("IllegalArgument returned from findById()");
         }
     }
+
+    public void insertValuation(Valuation valuation, Long userId, Long productId) {
+        Boolean exist = valuationRepository.isExistValuation(userId,productId);
+        if(exist != true) {
+            valuationRepository.insertValuation(userId, productId, valuation.getDescription(), valuation.getStars(), valuation.getDate());
+        }
+        else{
+            throw new IllegalArgumentException("This Valuation already exists! ");
+        }
+    }
 }

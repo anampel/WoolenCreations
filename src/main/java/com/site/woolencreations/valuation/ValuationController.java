@@ -32,6 +32,11 @@ public class ValuationController {
         valuationService.addValuation(val, userId, productId);
         return "Success";
     }
+    @PostMapping("/insert")
+    public String insertValuation (@RequestBody Valuation val, @RequestParam Long userId, @RequestParam Long productId){
+        valuationService.insertValuation(val, userId, productId);
+        return "Success";
+    }
 
     @DeleteMapping("/delete")
     public String deleteValuation (@RequestParam Long userID, Long prodID){

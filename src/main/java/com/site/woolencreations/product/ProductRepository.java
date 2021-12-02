@@ -20,13 +20,33 @@ public interface ProductRepository  extends JpaRepository<Product, Long> {
     void deleteAllById(Long id);
     Optional<Product> findProductsByDescriptionContains(String description);
 
+    /**
+     * It will be used by the search of the page
+     * @param keyword
+     * @return
+     */
     @Query("SELECT p FROM Product p WHERE p.description LIKE %:keyword% OR p.name LIKE  %:keyword%")
     List<Product> findProductsByKeyword(String keyword);
 
+    /**
+     * It will be used by clicking the category link/button
+     * @param categoryName
+     * @return
+     */
     @Query("SELECT p FROM Product p, Category c WHERE c.categoryName = ?1")
     List<Product> findProductsByCategory(String categoryName);
 
+    /**
+     * It will be used in a filtering search where you defined the discount
+     * @param discount
+     * @param today
+     * @return
+     */
     @Query("SELECT p FROM Product p, Offer f WHERE f.discount =?1 and f.start_date <= ?2 and f.end_date >= ?2")
     List<Product> findProductByDiscount(Double discount, Date today);
+
+    //TODO findAllProductsInOffer
+
+    //TODO think about a filtering search and construct a query with all necessary filters. For example (price range / category / etc.)
 
 }

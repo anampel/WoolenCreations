@@ -74,10 +74,10 @@ public class OfferService {
 
     public Optional<Offer> getActiveOffers(){
         long millis = System.currentTimeMillis();
-        java.sql.Date today = new java.sql.Date(millis);
+        Date today = new Date(millis);
         return offerRepository.getActiveOffers(today);
     }
 
-    //TODO getActiveOffers
+    //TODO getAllActiveByDiscount
 
 }

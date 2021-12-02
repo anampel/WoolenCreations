@@ -49,6 +49,9 @@ public class OfferController {
         return offerService.getAllByDiscount(discount);
     }
 
+    //TODO -> findActiveByDiscount
+
+
     @GetMapping("/getActiveOffers")
     public Optional<Offer> getActiveOffers(){
         return offerService.getActiveOffers();

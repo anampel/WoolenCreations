@@ -11,17 +11,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository  extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findProductByName(String name);
+
     Optional<Product> findProductById(Long id);
+
     @Transactional()
     @Modifying
     void deleteAllById(Long id);
+
     Optional<Product> findProductsByDescriptionContains(String description);
 
     /**
      * It will be used by the search of the page
+     *
      * @param keyword
      * @return
      */
@@ -30,6 +34,7 @@ public interface ProductRepository  extends JpaRepository<Product, Long> {
 
     /**
      * It will be used by clicking the category link/button
+     *
      * @param categoryName
      * @return
      */
@@ -38,6 +43,7 @@ public interface ProductRepository  extends JpaRepository<Product, Long> {
 
     /**
      * It will be used in a filtering search where you defined the discount
+     *
      * @param discount
      * @param today
      * @return
@@ -45,8 +51,9 @@ public interface ProductRepository  extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p, Offer f WHERE f.discount =?1 and f.start_date <= ?2 and f.end_date >= ?2")
     List<Product> findProductByDiscount(Double discount, Date today);
 
-    //TODO findAllProductsInOffer
-
     //TODO think about a filtering search and construct a query with all necessary filters. For example (price range / category / etc.)
+
+    @Query("SELECT p FROM Product p, Offer f WHERE p.offer.id is not null and f.start_date <= ?1 and f.end_date >= ?1")
+    List<Product> findAllProductsInOffer(Date today);
 
 }

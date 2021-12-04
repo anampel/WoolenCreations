@@ -1,5 +1,6 @@
 package com.site.woolencreations.order;
 
+import com.site.woolencreations.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,8 @@ public class Order {
             generator = "order_sequence"
     )
     private Long orderID;
+    @ManyToOne
+    private User user;
     //TODO userId
     //TODO addressId
     private Date date;

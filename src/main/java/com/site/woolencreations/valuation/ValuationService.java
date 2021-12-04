@@ -60,9 +60,10 @@ public class ValuationService {
     }
 
     public void insertValuation(Valuation valuation, Long userId, Long productId) {
-        Boolean exist = valuationRepository.isExistValuation(userId,productId);
-        if(exist != true) {
-            valuationRepository.insertValuation(userId, productId, valuation.getDescription(), valuation.getStars(), valuation.getDate());
+        Optional<Valuation> val = valuationRepository.isExistValuation(userId, productId);
+        if(!val.isPresent()) {
+            Date date = new Date(System.currentTimeMillis());
+            valuationRepository.insertValuation(userId, productId, valuation.getDescription(), valuation.getStars(), date);
         }
         else{
             throw new IllegalArgumentException("This Valuation already exists! ");

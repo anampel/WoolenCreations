@@ -1,12 +1,7 @@
 package com.site.woolencreations.order;
 
-import com.site.woolencreations.valuation.Valuation;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import java.util.Date;
 import java.util.Optional;
 
@@ -21,9 +16,9 @@ public class OrderService {
     /**
      * Find Order By UserID
      * return order
-     * */
-    public Optional<Order> findOrderByUserID(Long userID){
-        return orderRepository.findOrderByUserID(userID);
+     */
+    public Optional<Order> findOrderByUserID(Long userID) {
+        return null;// orderRepository.findOrderByUserID(userID);
     }
 
     /**
@@ -40,10 +35,10 @@ public class OrderService {
 
     /**
      * Add an order
-     * */
-    public void addOrder(Order order, Long userID){
-        Date date = new Date(System.currentTimeMillis());
-        orderRepository.insertOrder(order.getOrderID() , userID, date, order.getPhone(), order.getPaid(), order.getState(),
-                order.getShipping_company_name(), order.getShipping_cost());
+     */
+    public void addOrder(Order order, Long userID) {
+//        Date date = new Date(System.currentTimeMillis());
+//        orderRepository.insertOrder(userID, date, order.getPhone(), order.getPaid(), order.getState(),
+//                order.getShipping_company_name(), order.getShipping_cost());
     }
 }

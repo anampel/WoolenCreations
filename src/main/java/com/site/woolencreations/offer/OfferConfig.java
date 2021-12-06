@@ -1,12 +1,10 @@
 package com.site.woolencreations.offer;
 
-import com.site.woolencreations.product.Product;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 @Configuration
 public class OfferConfig {
@@ -22,7 +20,6 @@ public class OfferConfig {
                     .end_date(new SimpleDateFormat(dateFormat).parse("2021-01-25"))
                     .discount(10.0)
                     .build();
-
             repository.save(o);
         };
 

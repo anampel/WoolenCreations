@@ -2,7 +2,6 @@ package com.site.woolencreations.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController
@@ -21,8 +20,6 @@ public class OrderController {
         return orderService.findOrderByUserID(userID);
     }
 
-    //TODO findOrderByDate
-    //TODO add
     @PostMapping("/add")
     public String addOrder(@RequestBody Order order, @RequestParam Long userID){
         orderService.addOrder(order, userID);
@@ -30,4 +27,5 @@ public class OrderController {
     }
     //TODO findOrderByStatus
     //TODO orderByDate
+    //TODO findOrderByDate
 }

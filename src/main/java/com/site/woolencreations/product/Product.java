@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,7 +18,6 @@ import java.util.List;
 @Getter
 @Setter
 public class Product {
-
     @Id
     @SequenceGenerator(
             name = "product_sequence",

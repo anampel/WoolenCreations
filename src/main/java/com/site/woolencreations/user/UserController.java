@@ -1,6 +1,5 @@
 package com.site.woolencreations.user;
 
-import com.site.woolencreations.misc.Address;
 import com.site.woolencreations.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,29 +43,29 @@ public class UserController {
     }
 
     @GetMapping("/findIfGuest")
-    public Boolean findIfGuest(@RequestParam String username){
+    public Boolean findIfGuest(@RequestParam String username) {
         return userService.findIfGuest(username);
     }
 
     @PostMapping("/add")
-    public String registerNewUser (@RequestBody User user){
+    public String registerNewUser(@RequestBody User user) {
         userService.addNewUser(user);
         return "Success";
     }
 
     @GetMapping("/findWishList")
-    public List<Product> findUserWishList(@RequestParam Long userId){
+    public List<Product> findUserWishList(@RequestParam Long userId) {
         return userService.findUserWishList(userId);
     }
 
     @PutMapping("/edit")
-    public String editUser (@RequestBody User user){
+    public String editUser(@RequestBody User user) {
         userService.editUser(user);
         return "Success";
     }
 
     @DeleteMapping("/delete")
-    public String deleteUser (@RequestParam Long userID){
+    public String deleteUser(@RequestParam Long userID) {
         userService.deleteUser(userID);
         return "Success";
 

@@ -27,7 +27,6 @@ public class ProductConfig {
                                     .build()
 
                     ))
-//                    .offerId(1L)
                     .points(0)
                     .build();
 

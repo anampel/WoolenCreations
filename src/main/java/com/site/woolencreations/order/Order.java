@@ -1,6 +1,7 @@
 package com.site.woolencreations.order;
 
 
+import com.site.woolencreations.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,11 +9,9 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-@Table(name = "ORDER")
+@Table(name = "ORDERS")
 @Entity
 @SuperBuilder
 @AllArgsConstructor
@@ -30,9 +29,8 @@ public class Order {
             generator = "order_sequence"
     )
     private Long orderID;
-//    @ManyToOne
-//    private User user;
-
+    @ManyToOne
+    private User user;
     private Date date;
     private String phone;
     private Boolean paid;

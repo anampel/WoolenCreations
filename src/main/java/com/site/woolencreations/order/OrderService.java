@@ -43,7 +43,13 @@ public class OrderService {
     public void addOrder(Order order, Long userID) {
         Date date = new Date(System.currentTimeMillis());
         Optional<User> user = userRepository.findUserByID(userID);
-        order.setUser(user.isPresent() ? user.get() : null);
+        if(user.isPresent()){
+        order.setUser(user.get());
+        order.setDate(date);
+        }
+        else{
+            throw new IllegalStateException("The user does not exists!! ");
+        }
         orderRepository.save(order);
     }
 }

@@ -14,7 +14,6 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    //TODO findOrderByUserID
     @GetMapping("/findOrderByUserID")
     public Optional<Order> findOrderByUserID(@RequestParam Long userID){
         return orderService.findOrderByUserID(userID);
@@ -25,6 +24,8 @@ public class OrderController {
         orderService.addOrder(order, userID);
         return "success";
     }
+
+
     //TODO findOrderByStatus
     //TODO orderByDate
     //TODO findOrderByDate

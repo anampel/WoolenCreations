@@ -13,16 +13,15 @@ public class OrderConfig {
     @Bean
     CommandLineRunner commandLineRunnerOrder(OrderRepository repository) {
         return args -> {
-//            Order o = Order.builder()
-//                    .date(new SimpleDateFormat(dateFormat).parse("2021-01-10"))
-//                    .phone("6955555555")
-//                    .paid(true)
-//                    .shipping_company_name("ACS")
-//                    .state("IN PROGRESS")
-//                    .shipping_cost(56.50)
-//                    .build();
-//            repository.save(o);
-
+            Order o = Order.builder()
+                    .date(new SimpleDateFormat(dateFormat).parse("2021-01-10"))
+                    .phone("6955555555")
+                    .paid(true)
+                    .shipping_company_name("ACS")
+                    .state("IN PROGRESS")
+                    .shipping_cost(56.50)
+                    .build();
+            repository.save(o);
         };
     }
 }

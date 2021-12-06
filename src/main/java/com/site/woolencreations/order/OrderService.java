@@ -22,7 +22,7 @@ public class OrderService {
      * return order
      */
     public Optional<Order> findOrderByUserID(Long userID) {
-        return null;// orderRepository.findOrderByUserID(userID);
+        return orderRepository.findOrderByUserID(userID);
     }
 
     /**

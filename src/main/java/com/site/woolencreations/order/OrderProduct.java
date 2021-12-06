@@ -1,14 +1,13 @@
 package com.site.woolencreations.order;
 
+import com.site.woolencreations.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Table(name = "ORDER_PRODUCT")
@@ -19,9 +18,22 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class OrderProduct implements Serializable {
-    @EmbeddedId
-    private OrderPK pk;
+    @Id
+    @SequenceGenerator(
+            name = "orderProduct_sequence",
+            sequenceName = "orderProduct_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "orderProduct_sequence"
+    )
+    private Long id;
+    @ManyToOne
+    private Order order;
+    @OneToOne
+    private Product product;
     @Column(nullable = false)
     private int quantity;
+
 
 }

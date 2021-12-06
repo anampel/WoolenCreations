@@ -1,6 +1,7 @@
 package com.site.woolencreations.order;
 
 
+import com.site.woolencreations.product.Product;
 import com.site.woolencreations.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "ORDERS")
 @Entity
@@ -28,7 +30,7 @@ public class Order {
             strategy = GenerationType.SEQUENCE,
             generator = "order_sequence"
     )
-    private Long orderID;
+    private Long id;
     @ManyToOne
     private User user;
     private Date date;

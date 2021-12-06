@@ -11,11 +11,11 @@ import java.util.Optional;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 //    @Modifying
-//    @Query(value = "insert into ORDER (user_id, date, phone, paid, state, shipping_company_name, shipping_cost) " +
-//            "VALUES (:user_id, :date, :phone, :paid, :state, :shipping_company_name, :shipping_cost)", nativeQuery = true)
+//    @Query(value = "insert into ORDER (order_id, user_id, date, phone, paid, state, shipping_company_name, shipping_cost) " +
+//            "VALUES (:orderID, :user_id, :date, :phone, :paid, :state, :shipping_company_name, :shipping_cost)", nativeQuery = true)
 //    @Transactional
-//    void insertOrder(Long user_id, Date date, String phone, Boolean paid, String state, String shipping_company_name, Double shipping_cost);
-//
-//    @Query("SELECT o FROM Order o WHERE o.user.id =?1")
-//    Optional<Order> findOrderByUserID(Long userID);
+//    void insertOrder(Long orderID, Long user_id, Date date, String phone, Boolean paid, String state, String shipping_company_name, Double shipping_cost);
+
+    @Query("SELECT o FROM Order o WHERE o.user.id =?1")
+    Optional<Order> findOrderByUserID(Long userID);
 }

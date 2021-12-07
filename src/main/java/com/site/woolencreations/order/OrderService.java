@@ -13,13 +13,11 @@ import java.util.Optional;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
-    private final OrderProductRepository orderProductRepository;
     private final ProductRepository productRepository;
 
-    public OrderService(OrderRepository orderRepository, UserRepository userRepository, OrderProductRepository orderProductRepository, ProductRepository productRepository) {
+    public OrderService(OrderRepository orderRepository, UserRepository userRepository, ProductRepository productRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
-        this.orderProductRepository = orderProductRepository;
         this.productRepository = productRepository;
     }
 

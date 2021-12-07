@@ -36,10 +36,12 @@ public class OrderService {
 
 
     /**
-     * Find Order By Status
+     * Find Order By State
      * return list of Orders
      * */
-
+    public Optional<Order> findOrderByState(String state){
+        return orderRepository.findOrderByState(state);
+    }
 
     /**
      * Add an order

@@ -26,8 +26,11 @@ public class OrderController {
         return "success";
     }
 
+    @GetMapping("/findOrderByState")
+    public Optional<Order> findOrderByState(@RequestParam String state){
+        return orderService.findOrderByState(state);
+    }
 
-    //TODO findOrderByStatus
-    //TODO orderByDate
+    //TODO sortByDate
     //TODO findOrderByDate
 }

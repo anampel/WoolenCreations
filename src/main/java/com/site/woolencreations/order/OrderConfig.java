@@ -1,5 +1,6 @@
 package com.site.woolencreations.order;
 
+import com.site.woolencreations.misc.State;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +19,7 @@ public class OrderConfig {
                     .phone("6955555555")
                     .paid(true)
                     .shipping_company_name("ACS")
-                    .state("IN PROGRESS")
+                    .state(String.valueOf(State.IN_PROGRESS))
                     .shipping_cost(56.50)
                     .build();
             repository.save(o);

@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class Order {
     private String state;
     private String shipping_company_name;
     private Double shipping_cost;
-
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "orderID")
+    private List<OrderProduct> orderProduct = new ArrayList<>();
 
 }

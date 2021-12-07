@@ -1,5 +1,7 @@
 package com.site.woolencreations.order;
 
+import com.site.woolencreations.product.Product;
+import com.site.woolencreations.product.ProductRepository;
 import com.site.woolencreations.user.User;
 import com.site.woolencreations.user.UserRepository;
 import org.springframework.stereotype.Service;
@@ -11,10 +13,14 @@ import java.util.Optional;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
+    private final OrderProductRepository orderProductRepository;
+    private final ProductRepository productRepository;
 
-    public OrderService(OrderRepository orderRepository, UserRepository userRepository) {
+    public OrderService(OrderRepository orderRepository, UserRepository userRepository, OrderProductRepository orderProductRepository, ProductRepository productRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
+        this.orderProductRepository = orderProductRepository;
+        this.productRepository = productRepository;
     }
 
     /**
@@ -42,13 +48,22 @@ public class OrderService {
      */
     public void addOrder(Order order, Long userID) {
         Date date = new Date(System.currentTimeMillis());
+
         Optional<User> user = userRepository.findUserByID(userID);
-        if(user.isPresent()){
-        order.setUser(user.get());
-        order.setDate(date);
-        }
-        else{
+        if (user.isPresent()) {
+            order.setUser(user.get());
+            order.setDate(date);
+        } else {
             throw new IllegalStateException("The user does not exists!! ");
+        }
+        for (int i = 0; i < order.getOrderProduct().size(); i++) {
+            Optional<Product> product = productRepository.findProductById(order.getOrderProduct().get(i).getProduct().getId());
+            if (product.isPresent()) {
+                order.getOrderProduct().get(i).setProduct(product.get());
+                order.getOrderProduct().get(i).setQuantity(order.getOrderProduct().get(i).getQuantity());
+            } else {
+                throw new IllegalStateException("The product does not exists!! ");
+            }
         }
         orderRepository.save(order);
     }

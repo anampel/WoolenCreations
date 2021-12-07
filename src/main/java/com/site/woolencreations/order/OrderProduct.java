@@ -28,8 +28,6 @@ public class OrderProduct implements Serializable {
             generator = "orderProduct_sequence"
     )
     private Long id;
-    @ManyToOne
-    private Order order;
     @OneToOne
     private Product product;
     @Column(nullable = false)

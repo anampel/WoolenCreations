@@ -4,9 +4,13 @@ import com.site.woolencreations.product.Product;
 import com.site.woolencreations.product.ProductRepository;
 import com.site.woolencreations.user.User;
 import com.site.woolencreations.user.UserRepository;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.text.FieldPosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,27 +36,35 @@ public class OrderService {
     /**
      * Find Order By Date
      * return list of Orders
-     * */
-
+     */
+    public List<Order> findOrderByDate(Date date) {
+        return orderRepository.findOrderByDate(date);
+    }
 
     /**
      * Find Order By State
      * return list of Orders
-     * */
-    public Optional<Order> findOrderByState(String state){
+     */
+    public Optional<Order> findOrderByState(String state) {
         return orderRepository.findOrderByState(state);
     }
 
     /**
      * Add an order
      */
+    @SneakyThrows
     public void addOrder(Order order, Long userID) {
-        Date date = new Date(System.currentTimeMillis());
+//        Date date = new Date(System.currentTimeMillis());
+//        StringBuffer stringBuffer = new StringBuffer();
+        Date now = new Date();
+
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        simpleDateFormat.format(now, stringBuffer, new FieldPosition(0));
 
         Optional<User> user = userRepository.findUserByID(userID);
         if (user.isPresent()) {
             order.setUser(user.get());
-            order.setDate(date);
+            order.setDate(now);
         } else {
             throw new IllegalStateException("The user does not exists!! ");
         }

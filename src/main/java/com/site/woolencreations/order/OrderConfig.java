@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 
 @Configuration
 public class OrderConfig {
-    private static final String dateFormat = "yyyy-MM-dd";
+    public static final String dateFormat = "yyyy-MM-dd";
 
     @Bean
     CommandLineRunner commandLineRunnerOrder(OrderRepository repository) {

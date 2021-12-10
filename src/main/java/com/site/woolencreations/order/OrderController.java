@@ -1,9 +1,14 @@
 package com.site.woolencreations.order;
 
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Optional;
+
+import static com.site.woolencreations.order.OrderConfig.dateFormat;
 
 @RestController
 @RequestMapping(path = "/api/v1/order")
@@ -31,6 +36,11 @@ public class OrderController {
         return orderService.findOrderByState(state);
     }
 
+    @SneakyThrows
+    @GetMapping("findOrderByDate")
+    public List<Order> findOrderByDate(@RequestParam String date){
+        return orderService.findOrderByDate(new SimpleDateFormat(dateFormat).parse(date));
+    }
     //TODO sortByDate
-    //TODO findOrderByDate
 }
+//@DateTimeFormat(pattern = "yyyy-MM-dd") Date

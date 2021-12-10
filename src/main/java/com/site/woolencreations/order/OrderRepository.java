@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,4 +20,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Optional<Order> findOrderByUserID(Long userID);
 
     Optional<Order> findOrderByState(String state);
+    List<Order> findOrderByDate(Date date);
 }

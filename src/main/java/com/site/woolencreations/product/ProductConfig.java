@@ -19,13 +19,16 @@ public class ProductConfig {
                     .categoryList(List.of(
                             Category
                                     .builder()
-                                    .categoryName("rouxa")
+                                    .categoryName("Men")
                                     .build(),
                             Category
                                     .builder()
-                                    .categoryName("malina")
+                                    .categoryName("Hat")
+                                    .build(),
+                            Category
+                                    .builder()
+                                    .categoryName("Accessories")
                                     .build()
-
                     ))
                     .points(0)
                     .build();

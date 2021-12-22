@@ -56,6 +56,14 @@ public class ProductService {
     }
 
     /**
+     * Find products by Subcategory
+     *
+     * @param keyword
+     */
+    public List<Product> getProductBySubCategory(String keyword) {
+        return productRepository.findProductsBySubCategory(keyword);
+    }
+    /**
      * Find products by a given discount where the offer is active
      *
      * @param discount

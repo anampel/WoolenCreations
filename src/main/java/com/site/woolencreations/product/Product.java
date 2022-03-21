@@ -1,6 +1,6 @@
 package com.site.woolencreations.product;
 
-import com.site.woolencreations.misc.Category;
+import com.site.woolencreations.category.Category;
 import com.site.woolencreations.offer.Offer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "PRODUCT")
@@ -44,5 +45,6 @@ public class Product {
     private Offer offer;
 
     private int points;
+
 
 }

@@ -1,4 +1,4 @@
-package com.site.woolencreations.misc;
+package com.site.woolencreations.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,9 +25,12 @@ public class Category {
             strategy = GenerationType.SEQUENCE,
             generator = "category_sequence"
     )
-    private int categoryId;
+    private Long categoryId;
     private String categoryName;
-    private String subCategory;
+
+    public Category(Long categoryId) {
+        this.categoryId = categoryId;
+    }
 }
 
 

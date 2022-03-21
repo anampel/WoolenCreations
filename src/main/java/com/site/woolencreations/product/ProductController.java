@@ -52,8 +52,8 @@ public class ProductController {
     }
 
     @GetMapping("/findBySubCategory")
-    public List<Product> getProductBySubCategory(@RequestParam String categoryName) {
-        return productService.getProductBySubCategory(categoryName);
+    public List<Product> getProductBySubCategory(@RequestParam String categoryName, @RequestParam String subcategory) {
+        return productService.getProductBySubCategory(categoryName, subcategory);
     }
 
     @GetMapping("/findByDiscount")

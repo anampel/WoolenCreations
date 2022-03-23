@@ -36,4 +36,8 @@ public class Offer {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date end_date;
     private Double discount;
+
+    public Offer(Long id) {
+        this.id = id;
+    }
 }

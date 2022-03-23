@@ -55,7 +55,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     //TODO think about a filtering search and construct a query with all necessary filters. For example (price range / category / etc.)
 
-    @Query("SELECT p FROM Product p, Offer f WHERE p.offer.id is not null and f.start_date <= ?1 and f.end_date >= ?1")
+    @Query("SELECT distinct p FROM Product p, Offer f WHERE p.offer.id is not null and p.offer.id = f.id and f.start_date <= ?1 and f.end_date >= ?1")
     List<Product> findAllProductsInOffer(Date today);
 
 }

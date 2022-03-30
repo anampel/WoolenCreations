@@ -71,7 +71,11 @@ public class ProductController {
         productService.addNewProduct(product);
         return "Success";
     }
-
+    @PostMapping("/addList")
+    public String registerNewListProducts(@RequestBody List<Product> products) {
+        productService.addNewListProducts(products);
+        return "Success";
+    }
     @PutMapping("/edit")
     public String editUser(@RequestBody Product product) {
         productService.editProduct(product);

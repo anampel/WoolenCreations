@@ -125,6 +125,24 @@ public class ProductService {
     }
 
     /**
+     * Add in the DB a product only if the product name does not exists already in the db.
+     *
+     * @param products
+     */
+    public void addNewListProducts(List<Product> products) {
+
+        for (Product product : products) {
+            Optional<Product> productByName = productRepository
+                    .findProductByName(product.getName());
+            if (productByName.isPresent()) {
+                throw new IllegalStateException("The product already exists!!");
+            }
+        }
+        productRepository.saveAll(products);
+
+    }
+
+    /**
      * edit a product in the DB only if the product exist.
      *
      * @param product

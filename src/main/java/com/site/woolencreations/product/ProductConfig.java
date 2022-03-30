@@ -16,20 +16,6 @@ public class ProductConfig {
                     .description("aaaa")
                     .name("kaskol")
                     .price(15.0)
-                    .categoryList(List.of(
-                            Category
-                                    .builder()
-                                    .categoryName("Men")
-                                    .build(),
-                            Category
-                                    .builder()
-                                    .categoryName("Hat")
-                                    .build(),
-                            Category
-                                    .builder()
-                                    .categoryName("Accessories")
-                                    .build()
-                    ))
                     .points(0)
                     .build();
 

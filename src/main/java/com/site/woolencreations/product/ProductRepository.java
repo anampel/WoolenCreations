@@ -41,7 +41,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p, Category c WHERE c.categoryName = ?1")
     List<Product> findProductsByCategory(String categoryName);
 
-    @Query("SELECT p FROM Product p, Category c WHERE c.categoryName = ?1 and p.id in (select p from Product p, Category c where c.categoryName = ?2)")
+    @Query("SELECT p FROM Product p, Category c WHERE c.categoryName = ?1 and p.id in (select p.id from Product p, Category c where c.categoryName = ?2)")
     List<Product> findProductsBySubCategory(String category, String subcategory);
     /**
      * It will be used in a filtering search where you defined the discount

@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "PRODUCT")
@@ -33,7 +33,7 @@ public class Product {
     private String description;
     private Double price;
 
-    @ManyToMany(cascade = CascadeType.ALL )
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -41,7 +41,7 @@ public class Product {
     private List<Category> categoryList;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="offer_id")
+    @JoinColumn(name = "offer_id")
     private Offer offer;
 
     private int points;

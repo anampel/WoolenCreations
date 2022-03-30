@@ -29,7 +29,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      * @param keyword
      * @return
      */
-    @Query("SELECT p FROM Product p WHERE p.description LIKE %:keyword% OR p.name LIKE  %:keyword%")
+    @Query("SELECT p FROM Product p WHERE lower(p.description) LIKE lower(concat('%', :keyword ,'%')) OR lower(p.name) LIKE  lower(concat('%', :keyword ,'%'))")
     List<Product> findProductsByKeyword(String keyword);
 
     /**

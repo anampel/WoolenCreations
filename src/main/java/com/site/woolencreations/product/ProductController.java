@@ -1,5 +1,6 @@
 package com.site.woolencreations.product;
 
+import com.site.woolencreations.category.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,14 +47,14 @@ public class ProductController {
         return productService.findProductsByKeyword(keyword);
     }
 
-    @GetMapping("/findByCategory")
-    public List<Product> getProductByCategory(@RequestParam String categoryName) {
-        return productService.findProductsByCategory(categoryName);
+    @PostMapping("/findByCategory")
+    public List<Product> getProductByCategory(@RequestBody Category category) {
+        return productService.findProductsByCategory(category);
     }
 
-    @GetMapping("/findBySubCategory")
-    public List<Product> getProductBySubCategory(@RequestParam String categoryName, @RequestParam String subcategory) {
-        return productService.getProductBySubCategory(categoryName, subcategory);
+    @GetMapping("/findByTwoCategories")
+    public List<Product> getProductByTwoCategories(@RequestParam String category1, @RequestParam String category2) {
+        return productService.findProductsBySubCategory(category1,category2);
     }
 
     @GetMapping("/findByDiscount")

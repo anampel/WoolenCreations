@@ -1,13 +1,11 @@
 package com.site.woolencreations.product;
 
+import com.site.woolencreations.category.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProductService {
@@ -49,20 +47,21 @@ public class ProductService {
     /**
      * Find products by category
      *
-     * @param keyword
+     * @param category
      */
-    public List<Product> findProductsByCategory(String keyword) {
-        return productRepository.findProductsByCategory(keyword);
+    public List<Product> findProductsByCategory(Category category) {
+        return productRepository.findByCategoryListContains(category);
     }
 
     /**
      * Find products by Subcategory
      *
-     * @param category
-     * @param subcategory
+     * @param a
+     * @param b
      */
-    public List<Product> getProductBySubCategory(String category, String subcategory) {
-        return productRepository.findProductsBySubCategory(category, subcategory);
+
+    public List<Product> findProductsBySubCategory(String a, String b) {
+        return productRepository.findProductsBySubCategory(a,b);
     }
     /**
      * Find products by a given discount where the offer is active

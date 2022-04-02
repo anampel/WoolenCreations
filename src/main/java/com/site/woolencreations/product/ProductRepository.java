@@ -1,5 +1,6 @@
 package com.site.woolencreations.product;
 
+import com.site.woolencreations.category.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,13 +37,14 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     /**
      * It will be used by clicking the category link/button
      *
-     * @param categoryName
+//     * @param categoryName
      * @return
      */
-    @Query("SELECT p FROM Product p, Category c WHERE c.categoryName = ?1")
-    List<Product> findProductsByCategory(String categoryName);
+    List<Product> findByCategoryListContains(Category category);
 
-    @Query("SELECT p FROM Product p, Category c WHERE c.categoryName = ?1 and p.id in (select p.id from Product p, Category c where c.categoryName = ?2)")
+    String findQuery = "SELECT * FROM Product p WHERE p.id in (select p.id from Product p, Category c, PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?1) " +
+            "and p.id in (select p.id from Product p, Category c , PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?2)";
+    @Query(value = findQuery, nativeQuery = true)
     List<Product> findProductsBySubCategory(String category, String subcategory);
     /**
      * It will be used in a filtering search where you defined the discount

@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class Product {
     private String description;
     private Double price;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),

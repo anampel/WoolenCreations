@@ -53,13 +53,8 @@ public class OrderService {
      * Add an order
      */
     @SneakyThrows
-    public void addOrder(Order order, Long userID) {
-//        Date date = new Date(System.currentTimeMillis());
-//        StringBuffer stringBuffer = new StringBuffer();
+    public Order addOrder(Order order, Long userID) {
         Date now = new Date();
-
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        simpleDateFormat.format(now, stringBuffer, new FieldPosition(0));
 
         Optional<User> user = userRepository.findUserByID(userID);
         if (user.isPresent()) {
@@ -77,6 +72,6 @@ public class OrderService {
                 throw new IllegalStateException("The product does not exists!! ");
             }
         }
-        orderRepository.save(order);
+        return orderRepository.save(order);
     }
 }

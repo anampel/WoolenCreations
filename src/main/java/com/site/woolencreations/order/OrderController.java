@@ -14,10 +14,13 @@ import static com.site.woolencreations.order.OrderConfig.dateFormat;
 @RequestMapping(path = "/api/v1/order")
 public class OrderController {
     private final OrderService orderService;
+    private final OrderRepository orderRepository;
+
 
     @Autowired
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, OrderRepository orderRepository) {
         this.orderService = orderService;
+        this.orderRepository = orderRepository;
     }
 
     @GetMapping("/findOrderByUserID")
@@ -26,9 +29,8 @@ public class OrderController {
     }
 
     @PostMapping("/add")
-    public String addOrder(@RequestBody Order order, @RequestParam Long userID){
-        orderService.addOrder(order, userID);
-        return "success";
+    public Order addOrder(@RequestBody Order order, @RequestParam Long userID){
+       return orderService.addOrder(order, userID);
     }
 
     @GetMapping("/findOrderByState")

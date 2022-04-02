@@ -47,9 +47,9 @@ public class ProductController {
         return productService.findProductsByKeyword(keyword);
     }
 
-    @PostMapping("/findByCategory")
-    public List<Product> getProductByCategory(@RequestBody Category category) {
-        return productService.findProductsByCategory(category);
+    @GetMapping("/findByCategory")
+    public List<Product> getProductByCategory(@RequestParam String categoryName) {
+        return productService.findProductsByCategory(categoryName);
     }
 
     @GetMapping("/findByTwoCategories")

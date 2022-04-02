@@ -47,10 +47,10 @@ public class ProductService {
     /**
      * Find products by category
      *
-     * @param category
+     * @param categoryName
      */
-    public List<Product> findProductsByCategory(Category category) {
-        return productRepository.findByCategoryListContains(category);
+    public List<Product> findProductsByCategory(String categoryName) {
+        return productRepository.findByCategoryName(categoryName);
     }
 
     /**

@@ -40,7 +40,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 //     * @param categoryName
      * @return
      */
-    List<Product> findByCategoryListContains(Category category);
+    String findCategoryQuery = "SELECT * FROM Product p WHERE p.id in (select p.id from Product p, Category c, PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?1)";
+    @Query(value = findCategoryQuery, nativeQuery = true)
+    List<Product> findByCategoryName(String categoryName);
 
     String findQuery = "SELECT * FROM Product p WHERE p.id in (select p.id from Product p, Category c, PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?1) " +
             "and p.id in (select p.id from Product p, Category c , PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?2)";

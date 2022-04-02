@@ -66,8 +66,9 @@ public class UserService {
      */
     public void addNewUser(User user) {
         try {
+            String uname = user.getUsername();
             Optional<User> UserByUsername = userRepository
-                    .findUserByUsername(user.getUsername());
+                    .findUserByUsername(uname);
             if(UserByUsername.isPresent()){
                 throw new IllegalStateException("The User already exists!!");
             }

@@ -32,8 +32,8 @@ public class User {
     @Column(unique = true, nullable = false, length = 64)
     private String username;
     private String password;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String phone;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(

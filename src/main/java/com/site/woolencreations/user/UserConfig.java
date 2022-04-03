@@ -47,8 +47,8 @@ public class UserConfig {
             User user = User
                     .builder()
                     .username("anam@gmail.com")
-                    .first_name("Ana")
-                    .last_name("Mpel")
+                    .firstName("Ana")
+                    .lastName("Mpel")
                     .password("XXX")
                     .addressList(addresslist)
                     .points(150)
@@ -59,8 +59,8 @@ public class UserConfig {
             User user1 = User
                     .builder()
                     .username("xxx@gmail.com")
-                    .first_name("spi")
-                    .last_name("kat")
+                    .firstName("spi")
+                    .lastName("kat")
                     .password("aaa")
                     .addressList(addresslist1)
                     .points(150)

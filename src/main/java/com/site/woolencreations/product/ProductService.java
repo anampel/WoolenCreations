@@ -1,11 +1,16 @@
 package com.site.woolencreations.product;
 
-import com.site.woolencreations.category.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import java.sql.Date;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -22,8 +27,15 @@ public class ProductService {
      *
      * @return
      */
-    public List<Product> getProduct() {
-        return productRepository.findAll();
+    public List<Product> getProduct(Integer pageNo, Integer pageSize, String sort, String sortColumn) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, "ASC".equalsIgnoreCase(sort) ? Sort.by(sortColumn).ascending():Sort.by(sortColumn).descending() );
+        Page<Product> productPage = productRepository.findAll(paging);
+
+        if(productPage.hasContent()) {
+            return productPage.getContent();
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     /**
@@ -61,8 +73,9 @@ public class ProductService {
      */
 
     public List<Product> findProductsBySubCategory(String a, String b) {
-        return productRepository.findProductsBySubCategory(a,b);
+        return productRepository.findProductsBySubCategory(a, b);
     }
+
     /**
      * Find products by a given discount where the offer is active
      *

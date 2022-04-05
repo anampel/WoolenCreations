@@ -1,6 +1,7 @@
 package com.site.woolencreations.product;
 
 import com.site.woolencreations.category.Category;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -32,7 +33,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      * @return
      */
     @Query("SELECT p FROM Product p WHERE lower(p.description) LIKE lower(concat('%', :keyword ,'%')) OR lower(p.name) LIKE  lower(concat('%', :keyword ,'%'))")
-    List<Product> findProductsByKeyword(String keyword);
+    List<Product> findProductsByKeyword(String keyword, Pageable paging);
 
     /**
      * It will be used by clicking the category link/button

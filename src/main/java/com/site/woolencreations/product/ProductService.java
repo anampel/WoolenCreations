@@ -22,13 +22,17 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+
+    public Pageable getPagingAndSorting(Integer page, Integer size,String sort,String sortColumn){
+        return PageRequest.of(page, size, "ASC".equalsIgnoreCase(sort) ? Sort.by(sortColumn).ascending():Sort.by(sortColumn).descending() );
+    }
     /**
      * Find All products
      *
      * @return
      */
-    public List<Product> getProduct(Integer pageNo, Integer pageSize, String sort, String sortColumn) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, "ASC".equalsIgnoreCase(sort) ? Sort.by(sortColumn).ascending():Sort.by(sortColumn).descending() );
+    public List<Product> getProduct(Integer page, Integer pageSize, String sort, String sortColumn) {
+        Pageable paging =getPagingAndSorting(page,pageSize,sort,sortColumn);
         Page<Product> productPage = productRepository.findAll(paging);
 
         if(productPage.hasContent()) {
@@ -114,8 +118,9 @@ public class ProductService {
      * @param keyword
      * @return
      */
-    public List<Product> findProductsByKeyword(String keyword) {
-        return productRepository.findProductsByKeyword(keyword);
+    public List<Product> findProductsByKeyword(String keyword, Integer page, Integer size,String sort,String sortColumn) {
+        Pageable paging =getPagingAndSorting(page,size,sort,sortColumn);
+        return productRepository.findProductsByKeyword(keyword,paging);
     }
 
     /**

@@ -45,8 +45,12 @@ public class ProductController {
     }
 
     @GetMapping("/findByKeyword")
-    public List<Product> getProductByKeyword(@RequestParam String keyword) {
-        return productService.findProductsByKeyword(keyword);
+    public List<Product> getProductByKeyword(@RequestParam(defaultValue = "0") int page,
+                                             @RequestParam(defaultValue = "25") int size,
+                                             @RequestParam(defaultValue = "ASC") String sort,
+                                             @RequestParam(defaultValue = "name") String sortColumn,
+            @RequestParam String keyword) {
+        return productService.findProductsByKeyword(keyword,page, size,sort,sortColumn);
     }
 
     @GetMapping("/findByCategory")

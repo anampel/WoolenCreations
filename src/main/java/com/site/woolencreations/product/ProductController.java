@@ -22,18 +22,16 @@ public class ProductController {
     private final ProductService productService;
     private final OrderService orderService;
 
+    private static final String defaultPageNo = "0";
+    private static final String defaultPageSize = "25";
+    private static final String defaultSortMethod = "ASC";
+    private static final String defaultSortColumn = "name";
+
+
     @Autowired
     public ProductController(ProductService productService, OrderService orderService) {
         this.productService = productService;
         this.orderService = orderService;
-    }
-
-    @GetMapping("/findAll")
-    public List<Product> getProduct(@RequestParam(defaultValue = "0") int page,
-                                    @RequestParam(defaultValue = "25") int size,
-                                    @RequestParam(defaultValue = "ASC") String sort,
-                                    @RequestParam(defaultValue = "name") String sortColumn) {
-        return productService.getProduct(page, size, sort, sortColumn);
     }
 
     @GetMapping("/findByName")
@@ -51,48 +49,56 @@ public class ProductController {
         return productService.findProductsByDescriptionContains(descr);
     }
 
+    @GetMapping("/findAll")
+    public List<Product> getProduct(@RequestParam(defaultValue = defaultPageNo) int page,
+                                    @RequestParam(defaultValue = defaultPageSize) int size,
+                                    @RequestParam(defaultValue = defaultSortMethod) String sort,
+                                    @RequestParam(defaultValue = defaultSortColumn) String sortColumn) {
+        return productService.getProduct(page, size, sort, sortColumn);
+    }
+
     @GetMapping("/findByKeyword")
-    public List<Product> getProductByKeyword(@RequestParam(defaultValue = "0") int page,
-                                             @RequestParam(defaultValue = "25") int size,
-                                             @RequestParam(defaultValue = "ASC") String sort,
-                                             @RequestParam(defaultValue = "name") String sortColumn,
+    public List<Product> getProductByKeyword(@RequestParam(defaultValue = defaultPageNo) int page,
+                                             @RequestParam(defaultValue = defaultPageSize) int size,
+                                             @RequestParam(defaultValue = defaultSortMethod) String sort,
+                                             @RequestParam(defaultValue = defaultSortColumn) String sortColumn,
                                              @RequestParam String keyword) {
         return productService.findProductsByKeyword(keyword, page, size, sort, sortColumn);
     }
 
     @GetMapping("/findByCategory")
-    public List<Product> getProductByCategory(@RequestParam(defaultValue = "0") int page,
-                                              @RequestParam(defaultValue = "25") int size,
-                                              @RequestParam(defaultValue = "ASC") String sort,
-                                              @RequestParam(defaultValue = "name") String sortColumn,
+    public List<Product> getProductByCategory(@RequestParam(defaultValue = defaultPageNo) int page,
+                                              @RequestParam(defaultValue = defaultPageSize) int size,
+                                              @RequestParam(defaultValue = defaultSortMethod) String sort,
+                                              @RequestParam(defaultValue = defaultSortColumn) String sortColumn,
                                               @RequestParam String categoryName) {
         return productService.findProductsByCategory(page, size, sort, sortColumn, categoryName);
     }
 
     @GetMapping("/findByTwoCategories")
-    public List<Product> getProductByTwoCategories(@RequestParam(defaultValue = "0") int page,
-                                                   @RequestParam(defaultValue = "25") int size,
-                                                   @RequestParam(defaultValue = "ASC") String sort,
-                                                   @RequestParam(defaultValue = "name") String sortColumn,
+    public List<Product> getProductByTwoCategories(@RequestParam(defaultValue = defaultPageNo) int page,
+                                                   @RequestParam(defaultValue = defaultPageSize) int size,
+                                                   @RequestParam(defaultValue = defaultSortMethod) String sort,
+                                                   @RequestParam(defaultValue = defaultSortColumn) String sortColumn,
                                                    @RequestParam String category1,
                                                    @RequestParam String category2) {
         return productService.findProductsBySubCategory(page, size, sort, sortColumn, category1, category2);
     }
 
     @GetMapping("/findByDiscount")
-    public List<Product> findProductByDiscount(@RequestParam(defaultValue = "0") int page,
-                                               @RequestParam(defaultValue = "25") int size,
-                                               @RequestParam(defaultValue = "ASC") String sort,
-                                               @RequestParam(defaultValue = "name") String sortColumn,
+    public List<Product> findProductByDiscount(@RequestParam(defaultValue = defaultPageNo) int page,
+                                               @RequestParam(defaultValue = defaultPageSize) int size,
+                                               @RequestParam(defaultValue = defaultSortMethod) String sort,
+                                               @RequestParam(defaultValue = defaultSortColumn) String sortColumn,
                                                @RequestParam Double discount) {
         return productService.findProductByDiscount(page, size, sort, sortColumn, discount);
     }
 
     @GetMapping("/findAllProductsInOffer")
-    public List<Product> findAllProductsInOffer(@RequestParam(defaultValue = "0") int page,
-                                                @RequestParam(defaultValue = "25") int size,
-                                                @RequestParam(defaultValue = "ASC") String sort,
-                                                @RequestParam(defaultValue = "name") String sortColumn) {
+    public List<Product> findAllProductsInOffer(@RequestParam(defaultValue = defaultPageNo) int page,
+                                                @RequestParam(defaultValue = defaultPageSize) int size,
+                                                @RequestParam(defaultValue = defaultSortMethod) String sort,
+                                                @RequestParam(defaultValue = defaultSortColumn) String sortColumn) {
         return productService.findAllProductsInOffer(page, size, sort, sortColumn);
     }
 
@@ -123,7 +129,7 @@ public class ProductController {
 
 
     /**
-     *
+     *  Advertisement Algorithm
      */
     @PostMapping("/advertisement")
     public List<Product> targetedAdvertisement(@RequestParam Long customerId,

@@ -132,8 +132,8 @@ public class ProductController {
         if (customerId != null) {
             productList = orderService.findProductIdsByUserOrderingHistory(customerId);
         } else {
-            //TODO here I do not have the customerId so I will take other info to decide for example from cookies --add some requestParam or body ?
-            productList = new ArrayList<>();
+            //TODO here I do not have the customerId so I will take other info to decide for example I will haave a list with productId from cookies  ?
+            productList = productService.findProductsByIdIn(productIds);
         }
 
         List<String> preferedCategoryNames = productList

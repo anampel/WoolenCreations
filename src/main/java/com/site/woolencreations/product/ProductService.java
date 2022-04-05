@@ -60,6 +60,10 @@ public class ProductService {
         return productRepository.findProductById(id);
     }
 
+    public List<Product> findProductsByIdIn(List<Long> ids) {
+        return productRepository.findProductsByIdIn(ids);
+    }
+
     /**
      * Find products by category
      *

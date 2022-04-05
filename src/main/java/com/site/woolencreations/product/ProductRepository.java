@@ -43,12 +43,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      */
     String findCategoryQuery = "SELECT * FROM Product p WHERE p.id in (select p.id from Product p, Category c, PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?1)";
     @Query(value = findCategoryQuery, nativeQuery = true)
-    List<Product> findByCategoryName(String categoryName);
+    List<Product> findByCategoryName(String categoryName,Pageable paging);
 
     String findQuery = "SELECT * FROM Product p WHERE p.id in (select p.id from Product p, Category c, PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?1) " +
             "and p.id in (select p.id from Product p, Category c , PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?2)";
     @Query(value = findQuery, nativeQuery = true)
-    List<Product> findProductsBySubCategory(String category, String subcategory);
+    List<Product> findProductsBySubCategory(String category, String subcategory, Pageable paging);
     /**
      * It will be used in a filtering search where you defined the discount
      *
@@ -57,11 +57,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      * @return
      */
     @Query("SELECT p FROM Product p, Offer f WHERE f.discount =?1 and f.start_date <= ?2 and f.end_date >= ?2")
-    List<Product> findProductByDiscount(Double discount, Date today);
+    List<Product> findProductByDiscount(Double discount, Date today, Pageable paging);
 
     //TODO think about a filtering search and construct a query with all necessary filters. For example (price range / category / etc.)
 
     @Query("SELECT distinct p FROM Product p, Offer f WHERE p.offer.id is not null and p.offer.id = f.id and f.start_date <= ?1 and f.end_date >= ?1")
-    List<Product> findAllProductsInOffer(Date today);
+    List<Product> findAllProductsInOffer(Date today, Pageable paging);
 
 }

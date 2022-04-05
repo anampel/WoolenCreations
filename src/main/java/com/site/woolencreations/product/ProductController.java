@@ -22,11 +22,11 @@ public class ProductController {
     }
 
     @GetMapping("/findAll")
-    public List<Product> getProduct( @RequestParam(defaultValue = "0") int page,
-                                     @RequestParam(defaultValue = "25") int size,
-                                     @RequestParam(defaultValue = "ASC") String sort,
-                                     @RequestParam(defaultValue = "name") String sortColumn) {
-        return productService.getProduct(page, size,sort,sortColumn);
+    public List<Product> getProduct(@RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "25") int size,
+                                    @RequestParam(defaultValue = "ASC") String sort,
+                                    @RequestParam(defaultValue = "name") String sortColumn) {
+        return productService.getProduct(page, size, sort, sortColumn);
     }
 
     @GetMapping("/findByName")
@@ -49,28 +49,44 @@ public class ProductController {
                                              @RequestParam(defaultValue = "25") int size,
                                              @RequestParam(defaultValue = "ASC") String sort,
                                              @RequestParam(defaultValue = "name") String sortColumn,
-            @RequestParam String keyword) {
-        return productService.findProductsByKeyword(keyword,page, size,sort,sortColumn);
+                                             @RequestParam String keyword) {
+        return productService.findProductsByKeyword(keyword, page, size, sort, sortColumn);
     }
 
     @GetMapping("/findByCategory")
-    public List<Product> getProductByCategory(@RequestParam String categoryName) {
-        return productService.findProductsByCategory(categoryName);
+    public List<Product> getProductByCategory(@RequestParam(defaultValue = "0") int page,
+                                              @RequestParam(defaultValue = "25") int size,
+                                              @RequestParam(defaultValue = "ASC") String sort,
+                                              @RequestParam(defaultValue = "name") String sortColumn,
+                                              @RequestParam String categoryName) {
+        return productService.findProductsByCategory(page, size, sort, sortColumn, categoryName);
     }
 
     @GetMapping("/findByTwoCategories")
-    public List<Product> getProductByTwoCategories(@RequestParam String category1, @RequestParam String category2) {
-        return productService.findProductsBySubCategory(category1, category2);
+    public List<Product> getProductByTwoCategories(@RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "25") int size,
+                                                   @RequestParam(defaultValue = "ASC") String sort,
+                                                   @RequestParam(defaultValue = "name") String sortColumn,
+                                                   @RequestParam String category1,
+                                                   @RequestParam String category2) {
+        return productService.findProductsBySubCategory(page, size, sort, sortColumn, category1, category2);
     }
 
     @GetMapping("/findByDiscount")
-    public List<Product> findProductByDiscount(@RequestParam Double discount) {
-        return productService.findProductByDiscount(discount);
+    public List<Product> findProductByDiscount(@RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "25") int size,
+                                               @RequestParam(defaultValue = "ASC") String sort,
+                                               @RequestParam(defaultValue = "name") String sortColumn,
+                                               @RequestParam Double discount) {
+        return productService.findProductByDiscount(page, size, sort, sortColumn, discount);
     }
 
     @GetMapping("/findAllProductsInOffer")
-    public List<Product> findAllProductsInOffer() {
-        return productService.findAllProductsInOffer();
+    public List<Product> findAllProductsInOffer(@RequestParam(defaultValue = "0") int page,
+                                                @RequestParam(defaultValue = "25") int size,
+                                                @RequestParam(defaultValue = "ASC") String sort,
+                                                @RequestParam(defaultValue = "name") String sortColumn) {
+        return productService.findAllProductsInOffer(page, size, sort, sortColumn);
     }
 
     @PostMapping("/add")

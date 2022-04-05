@@ -65,8 +65,9 @@ public class ProductService {
      *
      * @param categoryName
      */
-    public List<Product> findProductsByCategory(String categoryName) {
-        return productRepository.findByCategoryName(categoryName);
+    public List<Product> findProductsByCategory(Integer page, Integer pageSize, String sort,String sortColumn, String categoryName) {
+        Pageable paging =getPagingAndSorting(page,pageSize,sort,sortColumn);
+        return productRepository.findByCategoryName(categoryName, paging);
     }
 
     /**
@@ -76,8 +77,9 @@ public class ProductService {
      * @param b
      */
 
-    public List<Product> findProductsBySubCategory(String a, String b) {
-        return productRepository.findProductsBySubCategory(a, b);
+    public List<Product> findProductsBySubCategory(Integer page, Integer pageSize, String sort,String sortColumn, String a, String b) {
+        Pageable paging =getPagingAndSorting(page,pageSize,sort,sortColumn);
+        return productRepository.findProductsBySubCategory(a, b,paging);
     }
 
     /**
@@ -85,19 +87,21 @@ public class ProductService {
      *
      * @param discount
      */
-    public List<Product> findProductByDiscount(Double discount) {
+    public List<Product> findProductByDiscount(Integer page, Integer pageSize, String sort,String sortColumn, Double discount) {
+        Pageable paging =getPagingAndSorting(page,pageSize,sort,sortColumn);
         long millis = System.currentTimeMillis();
         java.sql.Date today = new java.sql.Date(millis);
-        return productRepository.findProductByDiscount(discount, today);
+        return productRepository.findProductByDiscount(discount, today, paging);
     }
 
     /**
      * Find products that include discount and the offer is active
      */
-    public List<Product> findAllProductsInOffer() {
+    public List<Product> findAllProductsInOffer(Integer page, Integer pageSize, String sort,String sortColumn) {
+        Pageable paging =getPagingAndSorting(page,pageSize,sort,sortColumn);
         long millis = System.currentTimeMillis();
         Date today = new Date(millis);
-        List<Product> products = productRepository.findAllProductsInOffer(today);
+        List<Product> products = productRepository.findAllProductsInOffer(today, paging);
         return products;
     }
 

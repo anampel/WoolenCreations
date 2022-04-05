@@ -1,5 +1,6 @@
 package com.site.woolencreations.order;
 
+import com.site.woolencreations.category.Category;
 import com.site.woolencreations.product.Product;
 import com.site.woolencreations.product.ProductRepository;
 import com.site.woolencreations.user.User;
@@ -7,11 +8,11 @@ import com.site.woolencreations.user.UserRepository;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
-import java.text.FieldPosition;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -29,8 +30,19 @@ public class OrderService {
      * Find Order By UserID
      * return order
      */
-    public Optional<Order> findOrderByUserID(Long userID) {
+    public List<Order> findOrderByUserID(Long userID) {
         return orderRepository.findOrderByUserID(userID);
+    }
+
+    public List<Product> findProductIdsByUserOrderingHistory(Long customerId) {
+        return orderRepository.findProductIdsByUserOrderingHistory(customerId);
+
+    }
+
+    private List<Product> customerTargetedProducts(List<String> preferedCategoryNames, List<Double> preferedPrice, List<Integer> preferedProductPoints) {
+
+        return null;
+
     }
 
     /**

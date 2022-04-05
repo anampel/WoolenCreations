@@ -24,7 +24,7 @@ public class OrderController {
     }
 
     @GetMapping("/findOrderByUserID")
-    public Optional<Order> findOrderByUserID(@RequestParam Long userID) {
+    public List<Order> findOrderByUserID(@RequestParam Long userID) {
         return orderService.findOrderByUserID(userID);
     }
 

@@ -16,7 +16,7 @@ public class CategoryConfig {
                     .categoryName("Women")
                     .build();
             Category category2 = Category.builder()
-                    .categoryName("Kinds")
+                    .categoryName("Kids")
                     .build();
             Category category3 = Category.builder()
                     .categoryName("Home")

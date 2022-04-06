@@ -71,8 +71,8 @@ public class ProductController {
                                               @RequestParam(defaultValue = defaultPageSize) int size,
                                               @RequestParam(defaultValue = defaultSortMethod) String sort,
                                               @RequestParam(defaultValue = defaultSortColumn) String sortColumn,
-                                              @RequestParam String categoryName) {
-        return productService.findProductsByCategory(page, size, sort, sortColumn, categoryName);
+                                              @RequestParam String category1) {
+        return productService.findProductsByCategory(page, size, sort, sortColumn, category1);
     }
 
     @GetMapping("/findByTwoCategories")

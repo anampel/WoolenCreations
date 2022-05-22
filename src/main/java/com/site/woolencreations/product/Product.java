@@ -44,5 +44,7 @@ public class Product {
     private Offer offer;
     private int points;
     private String image;
+    private String color;
+    private String size;
 
 }

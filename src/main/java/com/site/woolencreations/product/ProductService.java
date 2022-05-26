@@ -131,6 +131,20 @@ public class ProductService {
         return productRepository.findProductsByKeyword(keyword,paging);
     }
 
+
+    /**
+     *  For advertisement purposes
+     * @param preferredCategoryNames
+     * @param preferredPrice
+     * @param preferredProductPoints
+     * @return
+     */
+    public List<Product> customerTargetedProducts(List<String> preferredCategoryNames, List<Double> preferredPrice, List<Integer> preferredProductPoints) {
+
+        //TODO Here we will combine the input info in order to query the DB and take products that matches  customer's profile.
+        return null;
+    }
+
     /**
      * Add in the DB a product only if the product name does not exists already in the db.
      *

@@ -142,29 +142,24 @@ public class ProductController {
             productList = productService.findProductsByIdIn(productIds);
         }
 
-        List<String> preferedCategoryNames = productList
+        List<String> preferredCategoryNames = productList
                 .stream()
                 .flatMap(product -> product.getCategoryList().stream().map(Category::getCategoryName))
                 .collect(Collectors.toList());
 
-        List<Double> preferedPrice = productList
+        List<Double> preferredPrice = productList
                 .stream()
                 .map(Product::getPrice)
                 .collect(Collectors.toList());
 
-        List<Integer> preferedProductPoints = productList
+        List<Integer> preferredProductPoints = productList
                 .stream()
                 .map(Product::getPoints)
                 .collect(Collectors.toList());
 
-        return customerTargetedProducts(preferedCategoryNames, preferedPrice, preferedProductPoints);
+        return productService.customerTargetedProducts(preferredCategoryNames, preferredPrice, preferredProductPoints);
 
 
     }
 
-    private List<Product> customerTargetedProducts(List<String> preferedCategoryNames, List<Double> preferedPrice, List<Integer> preferedProductPoints) {
-
-        //TODO Here we will combine the input info in order to query the DB and take products that matches customer's profile.
-        return null;
-    }
     }

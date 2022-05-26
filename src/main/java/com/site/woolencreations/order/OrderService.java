@@ -34,7 +34,7 @@ public class OrderService {
         return orderRepository.findOrderByUserID(userID);
     }
 
-    public List<Product> findProductIdsByUserOrderingHistory(Long customerId) {
+    public  List<OrderProduct> findProductIdsByUserOrderingHistory(Long customerId) {
         return orderRepository.findProductIdsByUserOrderingHistory(customerId);
 
     }

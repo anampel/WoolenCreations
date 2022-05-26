@@ -136,7 +136,7 @@ public class ProductController {
                                                @RequestBody List<Long> productIds) {
         List<Product> productList;
         if (customerId != null) {
-            productList = orderService.findProductIdsByUserOrderingHistory(customerId);
+            productList = (orderService.findProductIdsByUserOrderingHistory(customerId)).stream().map(orderProduct -> orderProduct.getProduct()).collect(Collectors.toList());
         } else {
             //TODO here I do not have the customerId so I will take other info to decide for example I will haave a list with productId from cookies  ?
             productList = productService.findProductsByIdIn(productIds);

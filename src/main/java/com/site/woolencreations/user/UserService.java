@@ -67,14 +67,13 @@ public class UserService {
     public void addToWishList(Long productId, Long userId) {
         Optional<User> user = userRepository.findUserByID(userId);
         if (user.isPresent()) {
-            List<Product> products = new ArrayList<>();
             Optional<Product> productById = productRepository.findProductById(productId);
             if (productById.isPresent()) {
-                products.add(productById.get());
+
+                user.get().getWishList().add(productById.get());
             }else{
                 throw new IllegalArgumentException("The product does not exist");
             }
-            user.get().setWishList(products);
             userRepository.save(user.get());
         }else
             throw new IllegalArgumentException("The user does not exist");

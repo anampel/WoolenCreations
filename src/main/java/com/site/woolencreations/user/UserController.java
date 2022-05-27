@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(path = "/api/v1/user")
 /**
@@ -59,8 +59,8 @@ public class UserController {
     }
 
     @PostMapping("/addToWishlist")
-    public String addWishList(@RequestParam Long productId, Long userId){
-        userService.addToWishList(productId, userId);
+    public String addWishList(@RequestBody WishListDTO wishListDTO){
+        userService.addToWishList(wishListDTO.getProductId(), wishListDTO.getUserId());
         return "Success";
     }
 

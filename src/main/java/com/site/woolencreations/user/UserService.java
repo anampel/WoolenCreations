@@ -78,6 +78,26 @@ public class UserService {
         }else
             throw new IllegalArgumentException("The user does not exist");
     }
+
+    /**
+     * Remove a product from the wishlist of a user
+     * @param productId
+     * @param userId
+     * @return
+     */
+    public void removeFromWishList(Long productId, Long userId){
+        Optional<User> user = userRepository.findUserByID(userId);
+        if (user.isPresent()) {
+            Optional<Product> productById = productRepository.findProductById(productId);
+            if (productById.isPresent()) {
+                user.get().getWishList().remove(productById.get());
+            }else{
+                throw new IllegalArgumentException("The product does not exist");
+            }
+            userRepository.save(user.get());
+        }else
+            throw new IllegalArgumentException("The user does not exist");
+    }
     /**
      * Find the wishlist of a user
      * @param id of the user

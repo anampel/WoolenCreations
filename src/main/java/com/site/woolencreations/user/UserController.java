@@ -68,6 +68,14 @@ public class UserController {
                 .errorCode(0)
                 .build();
     }
+    @DeleteMapping("/deleteFromWishList")
+    public Response removeFromWishList(@RequestBody WishListDTO wishListDTO){
+        userService.removeFromWishList(wishListDTO.getProductId(), wishListDTO.getUserId());
+        return  Response.builder()
+                .status("Success")
+                .errorCode(0)
+                .build();
+    }
 
 
     @PutMapping("/edit")

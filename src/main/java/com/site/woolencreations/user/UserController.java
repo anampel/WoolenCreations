@@ -1,5 +1,6 @@
 package com.site.woolencreations.user;
 
+import com.site.woolencreations.misc.Response;
 import com.site.woolencreations.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -59,10 +60,15 @@ public class UserController {
     }
 
     @PostMapping("/addToWishlist")
-    public String addWishList(@RequestBody WishListDTO wishListDTO){
+    public Response addWishList(@RequestBody WishListDTO wishListDTO){
         userService.addToWishList(wishListDTO.getProductId(), wishListDTO.getUserId());
-        return "Success";
+        return Response
+                .builder()
+                .status("Success")
+                .errorCode(0)
+                .build();
     }
+
 
     @PutMapping("/edit")
     public String editUser(@RequestBody User user) {

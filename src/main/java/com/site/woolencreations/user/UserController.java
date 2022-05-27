@@ -58,6 +58,12 @@ public class UserController {
         return userService.findUserWishList(userId);
     }
 
+    @PostMapping("/addToWishlist")
+    public String addWishList(@RequestParam Long productId, Long userId){
+        userService.addToWishList(productId, userId);
+        return "Success";
+    }
+
     @PutMapping("/edit")
     public String editUser(@RequestBody User user) {
         userService.editUser(user);

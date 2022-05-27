@@ -1,18 +1,21 @@
 package com.site.woolencreations.user;
 
 import com.site.woolencreations.product.Product;
+import com.site.woolencreations.product.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, ProductRepository productRepository) {
         this.userRepository = userRepository;
+        this.productRepository = productRepository;
     }
 
     /**
@@ -55,7 +58,32 @@ public class UserService {
 
         return userRepository.findIfGuest(username);
     }
-
+    /**
+     * Add a new product to the wishlist of a user
+     * @param productId
+     * @param userId
+     * @return
+     */
+    public void addToWishList(Long productId, Long userId) {
+        Optional<User> user = userRepository.findUserByID(userId);
+        if (user.isPresent()) {
+            List<Product> products = new ArrayList<>();
+            Optional<Product> productById = productRepository.findProductById(productId);
+            if (productById.isPresent()) {
+                products.add(productById.get());
+            }else{
+                throw new IllegalArgumentException("The product does not exist");
+            }
+            user.get().setWishList(products);
+            userRepository.save(user.get());
+        }else
+            throw new IllegalArgumentException("The user does not exist");
+    }
+    /**
+     * Find the wishlist of a user
+     * @param id of the user
+     * @return
+     */
     public List<Product> findUserWishList(Long id){
         return userRepository.findUserWishList(id);
     }

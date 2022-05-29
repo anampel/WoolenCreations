@@ -2,7 +2,9 @@ package com.site.woolencreations.product;
 
 import com.site.woolencreations.category.Category;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> , JpaSpecificationExecutor<Product> {
 
     Optional<Product> findProductByName(String name);
 
@@ -43,11 +45,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 //     * @param categoryName
      * @return
      */
-    String findCategoryQuery = "SELECT * FROM Product p WHERE p.id in (select p.id from Product p, Category c, PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?1)";
+    String findCategoryQuery = "SELECT * FROM Product p WHERE p.id in (select p.id from Product p, Category c, PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?1) and (p.color is null or p.color like ?2) and (p.size is null or p.size like ?3) ";
     @Query(value = findCategoryQuery, nativeQuery = true)
-    List<Product> findByCategoryName(String categoryName,Pageable paging);
+    List<Product> findByCategoryName(String categoryName, String color,String productSize, Pageable paging);
 
-    String findQuery = "SELECT * FROM Product p WHERE p.id in (select p.id from Product p, Category c, PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?1) " +
+    String findQuery = "SELECT * FROM Product p WHERE p.id in (select p.id from Product p, Category c, PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?1 and p.color like %?2) " +
             "and p.id in (select p.id from Product p, Category c , PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?2)";
     @Query(value = findQuery, nativeQuery = true)
     List<Product> findProductsBySubCategory(String category, String subcategory, Pageable paging);

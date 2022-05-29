@@ -1,11 +1,13 @@
 package com.site.woolencreations.product;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -23,19 +25,20 @@ public class ProductService {
     }
 
 
-    public Pageable getPagingAndSorting(Integer page, Integer size,String sort,String sortColumn){
-        return PageRequest.of(page, size, "ASC".equalsIgnoreCase(sort) ? Sort.by(sortColumn).ascending():Sort.by(sortColumn).descending() );
+    public Pageable getPagingAndSorting(Integer page, Integer size, String sort, String sortColumn) {
+        return PageRequest.of(page, size, "ASC".equalsIgnoreCase(sort) ? Sort.by(sortColumn).ascending() : Sort.by(sortColumn).descending());
     }
+
     /**
      * Find All products
      *
      * @return
      */
     public List<Product> getProduct(Integer page, Integer pageSize, String sort, String sortColumn) {
-        Pageable paging =getPagingAndSorting(page,pageSize,sort,sortColumn);
+        Pageable paging = getPagingAndSorting(page, pageSize, sort, sortColumn);
         Page<Product> productPage = productRepository.findAll(paging);
 
-        if(productPage.hasContent()) {
+        if (productPage.hasContent()) {
             return productPage.getContent();
         } else {
             return new ArrayList<>();
@@ -69,10 +72,11 @@ public class ProductService {
      *
      * @param categoryName
      */
-    public List<Product> findProductsByCategory(Integer page, Integer pageSize, String sort,String sortColumn, String categoryName) {
-        Pageable paging =getPagingAndSorting(page,pageSize,sort,sortColumn);
-        return productRepository.findByCategoryName(categoryName, paging);
+    public List<Product> findProductsByCategory(Integer page, Integer pageSize, String sort, String sortColumn, String categoryName, String color, String productSize) {
+        Pageable paging = getPagingAndSorting(page, pageSize, sort, sortColumn);
+        return productRepository.findByCategoryName(categoryName, color,productSize, paging);
     }
+
 
     /**
      * Find products by Subcategory
@@ -81,9 +85,9 @@ public class ProductService {
      * @param b
      */
 
-    public List<Product> findProductsBySubCategory(Integer page, Integer pageSize, String sort,String sortColumn, String a, String b) {
-        Pageable paging =getPagingAndSorting(page,pageSize,sort,sortColumn);
-        return productRepository.findProductsBySubCategory(a, b,paging);
+    public List<Product> findProductsBySubCategory(Integer page, Integer pageSize, String sort, String sortColumn, String a, String b) {
+        Pageable paging = getPagingAndSorting(page, pageSize, sort, sortColumn);
+        return productRepository.findProductsBySubCategory(a, b, paging);
     }
 
     /**
@@ -91,8 +95,8 @@ public class ProductService {
      *
      * @param discount
      */
-    public List<Product> findProductByDiscount(Integer page, Integer pageSize, String sort,String sortColumn, Double discount) {
-        Pageable paging =getPagingAndSorting(page,pageSize,sort,sortColumn);
+    public List<Product> findProductByDiscount(Integer page, Integer pageSize, String sort, String sortColumn, Double discount) {
+        Pageable paging = getPagingAndSorting(page, pageSize, sort, sortColumn);
         long millis = System.currentTimeMillis();
         java.sql.Date today = new java.sql.Date(millis);
         return productRepository.findProductByDiscount(discount, today, paging);
@@ -101,8 +105,8 @@ public class ProductService {
     /**
      * Find products that include discount and the offer is active
      */
-    public List<Product> findAllProductsInOffer(Integer page, Integer pageSize, String sort,String sortColumn) {
-        Pageable paging =getPagingAndSorting(page,pageSize,sort,sortColumn);
+    public List<Product> findAllProductsInOffer(Integer page, Integer pageSize, String sort, String sortColumn) {
+        Pageable paging = getPagingAndSorting(page, pageSize, sort, sortColumn);
         long millis = System.currentTimeMillis();
         Date today = new Date(millis);
         List<Product> products = productRepository.findAllProductsInOffer(today, paging);
@@ -126,14 +130,15 @@ public class ProductService {
      * @param keyword
      * @return
      */
-    public List<Product> findProductsByKeyword(String keyword, Integer page, Integer size,String sort,String sortColumn) {
-        Pageable paging =getPagingAndSorting(page,size,sort,sortColumn);
-        return productRepository.findProductsByKeyword(keyword,paging);
+    public List<Product> findProductsByKeyword(String keyword, Integer page, Integer size, String sort, String sortColumn) {
+        Pageable paging = getPagingAndSorting(page, size, sort, sortColumn);
+        return productRepository.findProductsByKeyword(keyword, paging);
     }
 
 
     /**
-     *  For advertisement purposes
+     * For advertisement purposes
+     *
      * @param preferredCategoryNames
      * @param preferredPrice
      * @param preferredProductPoints

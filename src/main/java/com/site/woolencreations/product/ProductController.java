@@ -161,5 +161,12 @@ public class ProductController {
 
 
     }
-
+    /**
+     * Find colors
+     * */
+    @GetMapping("/getColors")
+    public List<String> getColors() {
+        return this.productService.getColors();
     }
+
+}

@@ -207,4 +207,11 @@ public class ProductService {
         }
 
     }
+
+    /**
+     * Find colors
+     */
+    public List<String> getColors(){
+        return productRepository.findColors();
+    }
 }

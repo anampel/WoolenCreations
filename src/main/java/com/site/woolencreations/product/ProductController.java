@@ -3,8 +3,10 @@ package com.site.woolencreations.product;
 import com.site.woolencreations.category.Category;
 import com.site.woolencreations.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -69,11 +71,8 @@ public class ProductController {
                                               @RequestParam(defaultValue = defaultPageSize) int size,
                                               @RequestParam(defaultValue = defaultSortMethod) String sort,
                                               @RequestParam(defaultValue = defaultSortColumn) String sortColumn,
-                                              @RequestParam String category1,
-                                              @RequestParam (defaultValue = "%") String color,
-                                              @RequestParam (defaultValue = "%") String productSize) {
-
-        return productService.findProductsByCategory(page, size, sort, sortColumn, category1, color, productSize);
+                                              @RequestParam String category1) {
+        return productService.findProductsByCategory(page, size, sort, sortColumn, category1);
     }
 
     @GetMapping("/findByTwoCategories")
@@ -130,7 +129,7 @@ public class ProductController {
 
 
     /**
-     * Advertisement Algorithm
+     *  Advertisement Algorithm
      */
     @PostMapping("/advertisement")
     public List<Product> targetedAdvertisement(@RequestParam Long customerId,
@@ -162,5 +161,12 @@ public class ProductController {
 
 
     }
+    /**
+     * Find colors
+     * */
+    @GetMapping("/getColors")
+    public List<String> getColors() {
+        return this.productService.getColors();
+    }
 
-}
+    }

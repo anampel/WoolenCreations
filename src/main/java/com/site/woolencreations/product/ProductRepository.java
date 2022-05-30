@@ -68,4 +68,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> , JpaSpe
     @Query("SELECT distinct p FROM Product p, Offer f WHERE p.offer.id is not null and p.offer.id = f.id and f.start_date <= ?1 and f.end_date >= ?1")
     List<Product> findAllProductsInOffer(Date today, Pageable paging);
 
+    @Query("Select distinct p.color from Product p")
+    List<String> findColors();
 }

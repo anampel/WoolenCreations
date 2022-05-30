@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> , JpaSpecificationExecutor<Product> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findProductByName(String name);
 
@@ -49,7 +49,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> , JpaSpe
     @Query(value = findCategoryQuery, nativeQuery = true)
     List<Product> findByCategoryName(String categoryName, String color,String productSize, Pageable paging);
 
-    String findQuery = "SELECT * FROM Product p WHERE p.id in (select p.id from Product p, Category c, PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?1 and p.color like %?2) " +
+    String findQuery = "SELECT * FROM Product p WHERE p.id in (select p.id from Product p, Category c, PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?1) " +
             "and p.id in (select p.id from Product p, Category c , PRODUCT_CATEGORY pc where p.id = pc.product_id and c.category_id=pc.category_id and c.category_name = ?2)";
     @Query(value = findQuery, nativeQuery = true)
     List<Product> findProductsBySubCategory(String category, String subcategory, Pageable paging);

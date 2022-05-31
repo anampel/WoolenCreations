@@ -130,40 +130,6 @@ public class ProductController {
 
     }
 
-
-    /**
-     *  Advertisement Algorithm
-     */
-    @PostMapping("/advertisement")
-    public List<Product> targetedAdvertisement(@RequestParam Long customerId,
-                                               @RequestBody List<Long> productIds) {
-        List<Product> productList;
-        if (customerId != null) {
-            productList = (orderService.findProductIdsByUserOrderingHistory(customerId)).stream().map(orderProduct -> orderProduct.getProduct()).collect(Collectors.toList());
-        } else {
-            //TODO here I do not have the customerId so I will take other info to decide for example I will haave a list with productId from cookies  ?
-            productList = productService.findProductsByIdIn(productIds);
-        }
-
-        List<String> preferredCategoryNames = productList
-                .stream()
-                .flatMap(product -> product.getCategoryList().stream().map(Category::getCategoryName))
-                .collect(Collectors.toList());
-
-        List<Double> preferredPrice = productList
-                .stream()
-                .map(Product::getPrice)
-                .collect(Collectors.toList());
-
-        List<Integer> preferredProductPoints = productList
-                .stream()
-                .map(Product::getPoints)
-                .collect(Collectors.toList());
-
-        return productService.customerTargetedProducts(preferredCategoryNames, preferredPrice, preferredProductPoints);
-
-
-    }
     /**
      * Find colors
      * */

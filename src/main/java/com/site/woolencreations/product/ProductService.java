@@ -1,12 +1,10 @@
 package com.site.woolencreations.product;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -74,7 +72,7 @@ public class ProductService {
      */
     public List<Product> findProductsByCategory(Integer page, Integer pageSize, String sort, String sortColumn, String categoryName, String color, String productSize) {
         Pageable paging = getPagingAndSorting(page, pageSize, sort, sortColumn);
-        return productRepository.findByCategoryName(categoryName, color,productSize, paging);
+        return productRepository.findByCategoryName(categoryName, color, productSize, paging);
     }
 
 
@@ -135,20 +133,6 @@ public class ProductService {
         return productRepository.findProductsByKeyword(keyword, paging);
     }
 
-
-    /**
-     * For advertisement purposes
-     *
-     * @param preferredCategoryNames
-     * @param preferredPrice
-     * @param preferredProductPoints
-     * @return
-     */
-    public List<Product> customerTargetedProducts(List<String> preferredCategoryNames, List<Double> preferredPrice, List<Integer> preferredProductPoints) {
-
-        //TODO Here we will combine the input info in order to query the DB and take products that matches  customer's profile.
-        return null;
-    }
 
     /**
      * Add in the DB a product only if the product name does not exists already in the db.
@@ -216,7 +200,7 @@ public class ProductService {
     /**
      * Find colors
      */
-    public List<String> getColors(){
+    public List<String> getColors() {
         return productRepository.findColors();
     }
 }

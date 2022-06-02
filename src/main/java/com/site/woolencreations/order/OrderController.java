@@ -11,6 +11,7 @@ import java.util.Optional;
 import static com.site.woolencreations.order.OrderConfig.dateFormat;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/api/v1/order")
 public class OrderController {
     private final OrderService orderService;

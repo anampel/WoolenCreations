@@ -1,5 +1,6 @@
 package com.site.woolencreations.user;
 
+import com.site.woolencreations.misc.Auth;
 import com.site.woolencreations.misc.Response;
 import com.site.woolencreations.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,11 @@ public class UserController {
     public String registerNewUser(@RequestBody User user) {
         userService.addNewUser(user);
         return "Success";
+    }
+
+    @PostMapping("/authenticate")
+    public User authenticateLogin(@RequestBody Auth auth) {
+        return userService.authenticateLogin(auth.getUsername(), auth.getPassword());
     }
 
     @GetMapping("/findWishList")

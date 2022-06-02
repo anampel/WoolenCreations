@@ -124,6 +124,21 @@ public class UserService {
             throw new IllegalArgumentException("IllegalArgument returned from findUserByUsername()");
         }
     }
+    public User authenticateLogin(String username, String psw) {
+        try {
+            Optional<User> UserByUsername = userRepository
+                    .findUserByUsername(username);
+            if(!UserByUsername.isPresent()){
+                throw new IllegalStateException("The User does not exist!!");
+            }
+             if(!UserByUsername.get().getPassword().equals(psw)){
+                throw new IllegalStateException("The password is incorrect");
+            }
+             return UserByUsername.get();
+        }catch (Exception e){
+            throw new IllegalArgumentException("IllegalArgument returned from findUserByUsername()");
+        }
+    }
 
     /**
      *edit a User in the DB only if the User exist.

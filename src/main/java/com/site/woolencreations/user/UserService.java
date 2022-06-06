@@ -164,4 +164,30 @@ public class UserService {
         }
 
     }
+    public static Boolean authenticateLogin2(String username, String psw) {
+        try {
+            if(username.contains("1234")){
+                throw new IllegalStateException("Illegal username!!");
+            }
+            if(psw.isBlank()){
+                throw new IllegalStateException("The password is incorrect");
+            }
+            return true;
+        }catch (Exception e){
+            throw new IllegalArgumentException("IllegalArgument returned from findUserByUsername()");
+        }
+    }
+
+
+    public static int getPoints(Long id) {
+        int points = 0;
+        if (id == 1) {
+            points = 20;
+        } else if (id == 2) {
+            points=30;
+        } else if (id ==3) {
+            points=40;
+        }
+        return points;
+    }
 }

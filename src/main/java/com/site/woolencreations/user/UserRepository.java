@@ -29,4 +29,7 @@ public interface UserRepository  extends JpaRepository<User, Long> {
     @Transactional()
     @Modifying
     void deleteAllById(Long userID);
+
+
+    Boolean existsByUsername(String username);
 }

@@ -1,10 +1,15 @@
 package com.site.woolencreations.user;
 
+import com.site.woolencreations.misc.Address;
+import com.site.woolencreations.misc.Response;
+import com.site.woolencreations.misc.enums.Messages;
 import com.site.woolencreations.product.Product;
 import com.site.woolencreations.product.ProductRepository;
+import com.site.woolencreations.misc.utils.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Service
@@ -119,25 +124,64 @@ public class UserService {
             if(UserByUsername.isPresent()){
                 throw new IllegalStateException("The User already exists!!");
             }
+            user.setPassword(Security.hashPassword(user.getPassword()));
+            ArrayList<Address> userAddressList = new ArrayList<>();
+            for (Address address: user.getAddressList()) {
+                if (address.getAddressId() != null)
+                    userAddressList.add(address);
+            }
+            user.setAddressList(userAddressList);
+
             userRepository.save(user);
         }catch (Exception e){
             throw new IllegalArgumentException("IllegalArgument returned from findUserByUsername()");
         }
     }
-    public User authenticateLogin(String username, String psw) {
+    public UserResponse authenticateLogin(String username, String psw, HttpSession session) {
         try {
+            String password = Security.hashPassword("psw");
             Optional<User> UserByUsername = userRepository
                     .findUserByUsername(username);
             if(!UserByUsername.isPresent()){
-                throw new IllegalStateException("The User does not exist!!");
+                return UserResponse
+                        .builder()
+                        .response(
+                                Response
+                                .builder()
+                                .errorCode(400)
+                                .status(String.valueOf(Messages.IncorrectUser))
+                                .build()
+                        )
+                        .build();
             }
              if(!UserByUsername.get().getPassword().equals(psw)){
-                throw new IllegalStateException("The password is incorrect");
+                 return UserResponse
+                         .builder()
+                         .response(
+                                 Response
+                                 .builder()
+                                 .errorCode(400)
+                                 .status(String.valueOf(Messages.IncorrectPassword))
+                                 .build()
+                         )
+                         .build();
             }
-             return UserByUsername.get();
-        }catch (Exception e){
-            throw new IllegalArgumentException("IllegalArgument returned from findUserByUsername()");
-        }
+             session.setAttribute("user", UserByUsername);
+             return UserResponse
+                     .builder()
+                     .user(UserByUsername.get())
+                     .response(
+                             Response
+                                     .builder()
+                                     .errorCode(200)
+                                     .status(String.valueOf(Messages.SuccessMessage))
+                                     .build()
+                     )
+                     .build();
+
+            }catch (Exception e){
+                throw new IllegalArgumentException("IllegalArgument returned from findUserByUsername()");
+            }
     }
 
     /**

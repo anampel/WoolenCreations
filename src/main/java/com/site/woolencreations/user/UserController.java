@@ -6,6 +6,7 @@ import com.site.woolencreations.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
@@ -56,8 +57,8 @@ public class UserController {
     }
 
     @PostMapping("/authenticate")
-    public User authenticateLogin(@RequestBody Auth auth) {
-        return userService.authenticateLogin(auth.getUsername(), auth.getPassword());
+    public UserResponse authenticateLogin(@RequestBody Auth auth, HttpSession session) {
+        return userService.authenticateLogin(auth.getUsername(), auth.getPassword(), session);
     }
 
     @GetMapping("/findWishList")

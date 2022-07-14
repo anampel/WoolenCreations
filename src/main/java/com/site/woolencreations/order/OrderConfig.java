@@ -1,6 +1,6 @@
 package com.site.woolencreations.order;
 
-import com.site.woolencreations.misc.State;
+import com.site.woolencreations.misc.enums.State;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

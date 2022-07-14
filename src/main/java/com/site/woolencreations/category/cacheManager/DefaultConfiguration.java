@@ -1,4 +1,4 @@
-package com.site.woolencreations.cacheManager;
+package com.site.woolencreations.category.cacheManager;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;

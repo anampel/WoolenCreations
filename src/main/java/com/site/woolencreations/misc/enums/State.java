@@ -1,4 +1,4 @@
-package com.site.woolencreations.misc;
+package com.site.woolencreations.misc.enums;
 
 public enum State {
     IN_REVIEW("IN REVIEW"),
